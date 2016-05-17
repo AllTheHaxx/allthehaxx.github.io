@@ -145,6 +145,7 @@ ul li:before {
 
 blockquote {
 	color: #aaa;
+	margin-top: -3px;
 	padding-left: 20px;
 	/*padding-right: 10px;
 	padding-top: 10px;
