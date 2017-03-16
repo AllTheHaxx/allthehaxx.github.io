@@ -33,6 +33,7 @@
 				<li><a href="#faq">FAQ <span class="arrow">&raquo;</span></a></li>
 				<li><a href="#basic">Basic Lua Programming <span class="arrow">&raquo;</span></a></li>
 				<li><a href="#setup">Setting Up A Script <span class="arrow">&raquo;</span></a></li>
+				<li><a href="#apiitems">API Items <span class="arrow">&raquo;</span></a></li>
 			</ul>
 		</div>
 		<div class="col two">
@@ -214,10 +215,16 @@ end</code></pre>
 		<br>x = 0 → function a is called, it increases x by 5 (x is 5 now) and calls b().
 		<br>b() then simply prints 5 in the console.
 		<br>Though neither a() nor b() have gotten the variable x as parameters they can acces it because x is available for both, a() and b() (and any other function in this file...). => x is global for both functions.</p>
-	
-		<h2>Teeworlds Events in the AllTheHaxx Lua API<h2>
-		<p>This is an important chapter as it's the core of our API.
-			<br>To understand it we should face the following problem: You write your script with its variables, functions etc.
+	</div>
+
+	<div id="apiitems" class="section">
+		<h1>API Items</h1>
+		<p>This is an important chapter as it's the core of our API.</p>
+
+		<h2>Events</h2>
+
+			<p><strong>There are events and other items like functions or variables in our API. We will start with events here.</strong>
+			<br><br>To understand it we should face the following problem: You write your script with its variables, functions etc.
 			<br>But how does Teeworlds know when to call them?
 			<br><br><strong>That's where events come in</strong>:
 			<br>Teeworlds (as many other games, too) has intern events. These are functions in Teeworlds that are called after a specific thing happened, and they handle this event.
@@ -303,6 +310,10 @@ end</code></pre>
 			</div>
 
 			<strong>TODO: Taken from old docs, i think there are more events now :D</strong>
+
+			<h2>Functions and variables</h2>
+
+			<p><strong>There are also functions and variables that our API offers to interact with the game.</strong>
 	</div>
 
 	<!-- SUPPORT -->
