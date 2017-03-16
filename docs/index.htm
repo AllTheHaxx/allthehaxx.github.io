@@ -125,7 +125,7 @@ x = y 		-- x has now the same value as y → x is now "Text"</code></pre><p>
 			<br><strong>Mathemathical: +, - , *, /, =</strong></p>
 
 		<h2>Functions</h2>
-		<p>Functions are a seperate part of a script, they only do their stuff if you call them. Otherwhys they won't do anything.
+		<p>Functions are a seperate part of a script, they only do their stuff if you call them. Otherwise they won't do anything.
 			<br>Functions can get some input-variables (so called 'parameters') and can return one value or in internal in Lua multiple values (but this is usually not needed).
 
 		<br><br>The structure of a function looks like this:</p>
@@ -191,8 +191,119 @@ end</code></pre>
 	</div>
 
 	<div id="setup" class="section">
-	<h1>Setting Up A Script</h1>
+		<h1>Setting Up A Script</h1>
 		<p>Now you know what a function is, what variables are and other useful stuff. Now we can start writing our scripts.</p>
+
+		<h2>General</h2>
+		<p><br><br>In general a script is made out of 2 parts:
+		<ul>
+			<li>1: One or multiple functions which do the main work of the script.</li>
+			<li>2: Variables which are used for all functions of that script outside of any function, usually at the top/start of the script
+				<br>+ some functions needed to initialize the script.</li>
+		</ul>
+		<br>Example:
+		<pre><code class="lua">x = 0 -- we initialize x for all functions
+a() -- we initialize the script here by calling the function a()
+function a() -- does something with x
+	x = x+5 -- add 5 to x
+	b() -- call b to print x
+end
+function b()
+	print(x)
+end</code></pre>
+		In the end the following will happen:
+		<br>x = 0 → function a is called, it increases x by 5 (x is 5 now) and calls b().
+		<br>b() then simply prints 5 in the console.
+		<br>Though neither a() nor b() have gotten the variable x as parameters they can acces it because x is available for both, a() and b() (and any other function in this file...). => x is global for both functions.</p>
+	
+		<h2>Teeworlds Events in the AllTheHaxx Lua API<h2>
+		<p>This is an important chapter as it's the core of our API.
+			<br>To understand it we should face the following problem: You write your script with its variables, functions etc.
+			<br>But how does Teeworlds know when to call them?
+			<br><br><strong>That's where events come in</strong>:
+			<br>Teeworlds (as many other games, too) has intern events. These are functions in Teeworlds that are called after a specific thing happened, and they handle this event.
+			<br>We built our API in a way that allows you to bind your own written Lua-functions a specific event that you need. If this event happens in Teeworlds, your function will be called.
+
+			<br><br><strong>The following events are available in Lua (for now)</strong>:</p>
+			<div class="api_item">
+			<h3 class="option">OnTick()</h3>
+			<p>
+				<strong>No parameters</strong><br>
+				<strong>No return value</strong><br><br>
+
+				Maybe the most important event. A tick function, in game-programming, is
+				the main function of a game as it's called a specific number of times per
+				second and handles all important stuff which happens ingame (moving
+				characters, creating new entities like bullets, check for player collision,
+				checking if a player is hit by a bullet etc.)
+				<br><br>In Teeworlds, the function OnTick is called 50x per second, so once every 20ms.
+				You should register a function to this event if you need to do something each game
+				step, or simply if there is no other event you can bind to to get the script work.
+				<br><strong>Important</strong>: Make sure that you don't put heavy stuff into your OnTick
+				function, or it will significantly slow the whole game down!
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">OnScriptInit()</h3>
+			<p>
+				<strong>No parameters</strong><br>
+				<strong>Returns</strong> (boolean): If this function does not return true, the script won't be loaded<br /><br />
+
+				Called when the script is initialized.
+				<br><strong>Important</strong>: Make sure to return true, otherwise the loading will fail!
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">OnScriptUnload()</h3>
+			<p>
+				<strong>No parameters</strong><br>
+				<strong>No return value</strong><br><br>
+
+				Called when the script is unloaded.
+				<br><strong>Hint</strong>: Reset stuff here.
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">OnChat(ID, Team, Message)</h3>
+			<p>
+				<strong>Parameter</strong> <var>ID</var> (integer): ID of the player who sent the chat or -1 if it's a server message<br />
+				<strong>Parameter</strong> <var>Team</var> (integer): Is 1 if the chatmessage is teamchat (the green one), otherwise 0<br />
+				<strong>Parameter</strong> <var>Message</var> (string): The chat message itself, in plain text.<br />
+				<strong>No return value</strong><br /><br />
+
+				This event is called when a chatmessage comes in, either from a player or as
+				serverchat (the yellow one) from the server.
+				It passes the ID of the player who sent the message (more on this later),
+				the team (allchat or teamchat (the green one)) and the message itself.
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">OnEnterGame()</h3>
+			<p>
+				<strong>No parameters</strong><br>
+				<strong>No return value</strong><br><br>
+
+				This event is called when you enter (join) a server.
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">OnKill(Killer, Victim, Weapon)</h3>
+			<p>
+				<strong>Parameter</strong> <var>Killer</var> (integer): ID of the player who scored the kill<br />
+				<strong>Parameter</strong> <var>Victim</var> (integer): ID of the player who got killed<br />
+				<strong>Parameter</strong> <var>Weapon</var> (integer): The weapon which was used my the killer<br />
+				<strong>No return value</strong><br /><br />
+
+				This event is called when a player dies (watch your killmessages on the top right of the screen).
+			</p>
+			</div>
+
+			<strong>TODO: Taken from old docs, i think there are more events now :D</strong>
 	</div>
 
 
