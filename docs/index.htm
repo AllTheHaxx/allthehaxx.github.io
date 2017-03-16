@@ -32,6 +32,7 @@
 			<ul>
 				<li><a href="#faq">FAQ <span class="arrow">&raquo;</span></a></li>
 				<li><a href="#basic">Basic Lua Programming <span class="arrow">&raquo;</span></a></li>
+				<li><a href="#setup">Setting Up A Script <span class="arrow">&raquo;</span></a></li>
 			</ul>
 		</div>
 		<div class="col two">
@@ -128,11 +129,74 @@ x = y 		-- x has now the same value as y → x is now "Text"</code></pre><p>
 			<br>Functions can get some input-variables (so called 'parameters') and can return one value or in internal in Lua multiple values (but this is usually not needed).
 
 		<br><br>The structure of a function looks like this:</p>
-		<pre><code class="lua">function Name(ParameterOne, ParameterTwo)
+		<pre><code class="lua">function Name(ParameterOne)
 	-- do stuff here
 	return something -- optional, also multireturn is possible!
 end</code></pre>
+		
+		<p><br>Example:</p>
+		<pre><code class="lua">function Sum(Number1, Number2)
+	NumberSum = Number1 + Number2 -- sets the variable NumberSum
+	return NumberSum -- returns the variable NumberSum
+end</code></pre>
+
+		<p><br>As stated, this won't do anything on its own: You need to call the function. This can be
+achieved like in this short example programm:</p>
+		<pre><code class="lua">function Sum(Number1, Number2)
+	NumberSum = Number1 + Number2 -- sets the variable NumberSum
+	return NumberSum -- returns the variable NumberSum
+end
+
+x = 5
+y = 10
+Result = Sum(x, y) -- the function is called, sums both numbers and returns 15; this number then is stored in the variable 'Result'
+function HelloWorld() -- no parameters!
+	print("Hello world! The sum of "..x.." and "..y.." is "..Result) -- the ".." operator glues two pieces of text (strings)
+end
+
+HelloWorld() -- call the function</code></pre>
+		<p>This simply prints "Hello world! The sum of 5 and 10 is 15" into the Teeworlds-Console. Try it for yourself!</p>
+	
+		<h2>The if-statement</h2>
+		<p>This statement is important when you want something to be done <strong>based on a condition</strong>.
+
+		<br><br>Send a chatmessage when someone says something in the chat, quit the game if you died 5 times and any other things bound to conditions you can think of.
+		<br>General syntax:</p>
+		<pre><code class="lua">if Statement then -- "Statement" can for example be 5 ~= 3 (always true)
+	-- do stuff...
+end</pre></code>
+		<p>Statements are usually comparisons of variables, numbers, texts, returnvalues from functions or anything else.
+		<h2>Operators</h2></p>
+		<ul class="list">
+			<li><h2>==</h2>
+			This operator in an statement returns true if the data left and right of the operator have the <strong>same value</strong>, thus are equal!
+			<pre><code class="lua">x = 10 -- x is now assumed to be 10 in any further examples!
+if x == 5 then
+	print("x is 5!")
+end</code></pre>
+			This is a false statement, because x is declared as 10 and 10 is not 5, so the print function will not be called.
+			<br>In contrast:
+			<pre><code class="lua">if x == 10 then
+	print("Yey, x is 10!")
+end</code></pre>
+			This is a true statement because x is declared as 10 and 10 is equal to 10, so you will find a nice message in your console by the print function.</li>
+			<li><h2>~=</h2>
+			This operator is the opposite of ==, it will return true if the equation is <strong>not equal</strong></li>
+			<li><strong>TODO: Add the rest. While you see this message as a user... Just use google for now.</strong></li>
+		</ul>
+
+		<h2>Loops</h2>
+		<p><strong>TODO: Add the rest. While you see this message as a user... Just use google for now.</strong></p>
+
 	</div>
+
+	<div id="setup" class="section">
+	<h1>Setting Up A Script</h1>
+		<p>Now you know what a function is, what variables are and other useful stuff. Now we can start writing our scripts.</p>
+	</div>
+
+
+
 
 	<!-- CONFIG -->
 	<div id="config" class="section">
