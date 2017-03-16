@@ -1,0 +1,18 @@
+﻿/* reset */
+html {height:100%;width:100%}
+body {font:normal 62.5%/2em sans-serif;background:white;color:#333}
+acronym {cursor:help}
+html, body, h1, h2, h3, h4, h5, h6, form, ul, ol, li, dl, dt, dd, p {margin:0px;padding:0px;font-size:12px;list-style:none;text-align:left}
+:link, :visited, :hover, :active, :focus {text-decoration:none;outline:0px}
+h1, h2, h3, h4, h5, h6, pre, code, input, select, textarea, address, p, div, span {font:normal 12px sans-serif;text-align:left}
+a img,:link img,:visited img, fieldset, abbr {border:0px}
+table {border-collapse:collapse;border-spacing:0px}
+td, caption, th, tfoot, thead {text-align:left;vertical-align:top}
+input[type='submit'],input[type='button'],input[type='reset'] {text-align:center}
+q:before, q:after {content:""}
+sup, sub {height:0;line-height:1;vertical-align:baseline;_vertical-align:bottom;position:relative}
+sup {bottom:1ex}
+sub {top:.5ex}
+.clearthis:after {content:".";display:block;height:0;clear:both;visibility:hidden}
+.clearthis {display:inline-block}
+.clearthis {display:block} /* Hides from IE-mac \*/

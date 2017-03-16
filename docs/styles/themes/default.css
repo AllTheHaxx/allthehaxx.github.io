@@ -1,0 +1,44 @@
+﻿@import '../reset.css';
+
+/* default styles */
+body { font-family: Helvetica, Arial, sans-serif; padding: 20px 20px 500px }
+#wrapper { width: 980px; margin: 0px auto; padding-bottom: 40px }
+a:link, a:visited { color: blue; font-weight: bold }
+a:hover, a:active { color: red }
+
+/*@ title */
+h1#title { font-size: 40px; padding: 20px 0px 0px }
+h2#description { font-size: 20px; padding: 0px 0px 20px }
+
+/*@ toc */
+#toc-link { position: fixed; top: 0px; left: 0px; z-index: 10000; width: 60%; text-align: right; padding: 3px 20% 3px; background: black; color: white }
+#toc .col { width: 25%; padding: 0px 0px 10px; float: left }
+#toc .indent { margin: 0 15px }
+#toc .indent li { list-style: circle inside }
+#toc .indent span.arrow { color: #fff }
+span.arrow { font-weight: bold; color: #c00 }
+
+/*@ content */
+h1 { font-size: 20px; font-weight: bold; float: left; background: #ff9 }
+h2 { font-size: 16px; font-weight: bold; padding: 22px 0px 5px; clear: left }
+code, pre { background: #e6ebeb; font-family: Courier; padding: 2px; margin: 0px; color: #666; white-space: pre-wrap }
+code span { font-family: Courier }
+pre { margin-bottom: 10px }
+var { color: #c00 }
+ul.list li { list-style: disc; margin-left: 15px }
+ol.numbers { margin-left: 20px }
+ol.numbers li { list-style-type: decimal; list-style-position: outside; margin-left: 5px }
+p, ul, ol { padding-bottom: 10px }
+ul ul { padding: 0 }
+.nopad { padding: 0 }
+.section { padding: 20px 0px 10px; border-top: dotted 1px #333 }
+.clear { clear: both }
+h1 + p { margin: 0px 20px; padding: 5px 0; vertical-align: baseline; border-bottom: dashed 1px #ccc; float: left }
+h1 + p + p { clear: both; font-style: italic; text-align: right; padding: 5px 0 0 }
+.hr { margin: 10px auto 20px; width: 100px; border-top: double 4px #c00 }
+.anchor { padding-top: 20px }
+
+/*@ api */
+.api_item { margin: 0 30px }
+h3.option { font-size: 16px; font-weight: bold; padding: 20px 0px 5px; margin-bottom: 5px; color: #666; border-bottom: dashed 1px #aaa }
+h3.option .chain { font-size: small; color: #aaa }

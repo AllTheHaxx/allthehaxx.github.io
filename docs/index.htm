@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>AllTheHaxx Lua API | _Project Description Short_</title>
+		<link rel="Stylesheet" href="styles/themes/default.css" />
+		<link rel="Stylesheet" href="js/highlight/styles/vs.css" />
+		<script src="js/highlight/highlight.pack.js" type="text/javascript"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+		<style type="text/css">
+			/* page specific styles */
+		</style>
+</head>
+<body>
+
+<div id="wrapper">
+
+	<div id="top">
+		<h1 id="title">AllTheHaxx Lua API</h1>
+		<h2 id="description">
+			A small guide to the <strong>AllTheHaxx Lua API</strong>. This Guide is not a complete guide on how
+			to code in Lua, there are a lot of tutorials online, so probably learn something about Lua first
+			if you don't know what its all about already.
+		</h2>
+		<a href="#toc" id="toc-link">Table of Contents</a>
+	</div>
+
+	<div id="toc" class="section clearthis">
+		<h1>Table of Contents</h1>
+
+		<div class="col one clear">
+			<h2>Documentation</h2>
+			<ul>
+				<li><a href="#faq">FAQ <span class="arrow">&raquo;</span></a></li>
+				<li><a href="#basic">Basic Lua Programming <span class="arrow">&raquo;</span></a></li>
+			</ul>
+		</div>
+		<div class="col two">
+			<h2>Examples</h2>
+			<ul>
+				<li><a href="#examples">See All Examples <span class="arrow">&raquo;</span></a></li>
+			</ul>
+		</div>
+		<div class="col three">
+			<h2>Project Notes</h2>
+			<ul>
+				<li><a href="changelog.md">Changelog <span class="arrow">&raquo;</span></a></li>
+				<li><a href="to-do.md">Planned Enhancements <span class="arrow">&raquo;</span></a></li>
+				<li><a href="#support">Support <span class="arrow">&raquo;</span></a></li>
+				<li><a href="#license">License <span class="arrow">&raquo;</span></a></li>
+			</ul>
+		</div>
+		<div class="col four">
+			<h2>Contributors</h2>
+			<ul>
+				<li><em>John Doe</em> | <a href="http://JohnDoe.com/">JohnDoe.com</a></li>
+				<li><em>Jane Doe</em> | <a href="http://JaneDoe.com/">JaneDoe.com</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="faq" class="section">
+		<h1>FAQ</h1>
+		<p>Frequently asked questions about the <strong>AllTheHaxx Lua API</strong>.</p>
+		<p></p>
+		
+		<h2>What is Lua?</h2>
+		<p>Lua is a dynamic scriptlanguage which can be embedded in other discrete programs. It
+			allows to run external Lua-Scripts in the program through an embedded
+			Just-In-Time-Compiler (because we use LuaJIT, normal Lua only offers an interpreter).</p>
+
+		<h2>What do I need?</h2>
+		<p>Through downloading the AllTheHaxx client the first step is already done.
+			We suggest to use a Lua-capable editor (notepad++, any IDE editor, <strong>not</strong> the standard windows editor).
+			Also reading this tutorial is really helpful (if not vital; experienced
+			programmer can read through it fast tho).</p>
+	
+		<h2>What can be done with Lua?</h2>
+		<p>We implemented Lua in our script in a way that you can do as many stuff as possible.
+			You can mess around in the LuaConsole (F6) or write your own functions, scripts etc...</p>
+
+		<h2>How is the System set up?</h2>
+		<p>You can write your own functions or scripts in .lua files and run them through our Lua-GUI
+			in the settings or you can write local functions in the LuaConsole (they won't be saved on
+			closing the client!).
+			Each .lua file has their own "LuaSpace", that means it doesn't clash with other scripts in any
+			way.
+			In our system you can simply bind your written Lua-Functions to an Ingame-Event, such as
+			OnTick, which is called every 50 times per second by the client.
+			Please note : We, the devs, must implement all Ingame-Functions to the Lua-API, so it might
+			occur that there is no specific function for your needs provided, in that case contact the devs
+			through skype or our QuakeNet Channel. Anyway, we try to implement as much updates
+			with new necessary Lua-Functions as possible.</p>
+
+		<h2>Pros and cons for using Lua?</h2>
+		<p><strong>Pro</strong></p>
+		<ul class="list">
+			<li>No compilation needed</li>
+			<li>You don't need to know C++ or any Teeworlds related coding stuff</li>
+			<li>Your written Lua-Stuff won't (usually) crash your client; error messages are printed in Teeworld's console</li>
+		</ul>
+
+		<p><strong>Contra</strong></p>
+		<ul class="list">
+			<li>You won't be able to rewrite the whole client to a new thing, you can only change the things that are offered to change and add minor new functionalities to it.</li>
+			<li>You have to read through this documentation.</li>
+			<li>You have to read through this documentation accurate if you can't programm at all, and we also recommend to checkout another Lua as this one is far from complete (there are great videos!).</li>
+		</ul>	
+	</div>
+
+	<div id="basic" class="section">
+		<h1>Basic Lua Programming</h1>
+		<p>In this chapter we will explain the basic Lua-Syntax (no API-stuff yet!); if you are new to programming in general you should start reading from here; the rest should just look at the syntax and continue. This chapters intention is to refresh your Lua skills.</p>
+
+		<h2>Comments</h2>
+		<p>A comment in lua starts with two dashes <code>("--")</code>. Everything behind will be ignored during execution. If you want to outcomment a whole block of code, you can do so by putting <code>--[[</code> at the start of your comment, and <code>]]</code> at the end.</p>
+
+		<h2>Variables</h2>
+		<p>Variables are used to store (and read) data in any way. That's all, Lua is dynamically typed, this means there are no datatypes etc., so you don't need to mind anything. Variables must start with a letter and should indicite what they are storing by their name.
+		</p><pre><code>x = 10 		-- the number 10 is now stored in the variable x :)
+y = "Text" 	-- y stores now the string "Text"
+x = y 		-- x has now the same value as y → x is now "Text"</code></pre><p>
+			<br>In General you can store anything you want in variables in Lua, even functions.
+			<br>Valid operators for variables (and general)
+			<br><strong>Mathemathical: +, - , *, /, =</strong></p>
+
+		<h2>Functions</h2>
+		<p>Functions are a seperate part of a script, they only do their stuff if you call them. Otherwhys they won't do anything.
+			<br>Functions can get some input-variables (so called 'parameters') and can return one value or in internal in Lua multiple values (but this is usually not needed).
+
+		<br><br>The structure of a function looks like this:</p>
+		<pre><code class="lua">function Name(ParameterOne, ParameterTwo)
+	-- do stuff here
+	return something -- optional, also multireturn is possible!
+end</code></pre>
+	</div>
+
+	<!-- CONFIG -->
+	<div id="config" class="section">
+		<h1>Config</h1>
+		<p>Let's show you how to take full advantage of <strong>AllTheHaxx Lua API</strong> by setting the various config options available to you.</p>
+		<p><strong>Useful for:</strong> Customizing Behavior, Automating More Tasks, Disabling Unwanted Features</p>
+		
+		<h2>Passing In Config Options</h2>
+		<p>First, lets show you how to pass in a config object. Then we'll show you what's available.</p>
+
+		<div class="api_item">
+			<h3 class="option">Pass In A Config Object</h3>
+			<p><strong>Param</strong> <var>config</var> (obj)</p>
+			<p>You will start by making a new config object, then pass it in on generation of your rotator.</p>
+			<pre><code class="javascript">jQuery(function($) {
+	
+	window.rotator = $('#rotator').rotator({ random: true, transition: 'fade', interval: 10000 });
+
+	// or be easier to read
+
+	var config = {
+		random: true,
+		transition: 'fade',
+		interval: 10000 // 10 seconds
+	}
+
+	window.rotator = $('#rotator').rotator(config);
+
+});</code></pre>
+		</div>
+
+
+
+		<h2>Available Config Options</h2>
+		<p>Here are all of the config options available to you upon generation of your rotator.</p>
+
+		<div class="api_item">
+			<h3 class="option">function()</h3>
+			<p>
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Requires</strong> <var>name</var> (function)<br />
+				<strong>Returns</strong> (string)
+			</p>
+			<p></p>
+			<pre><code class="javascript">// returns 'Satellite-Pro-U500'
+toUrlSafe('Satellite Pro U500');</code></pre>
+		</div>
+
+		<div class="api_item">
+			<h3 class="option">function()</h3>
+			<p>
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Requires</strong> <var>name</var> (function)<br />
+				<strong>Returns</strong> (string)
+			</p>
+			<p></p>
+			<pre><code class="javascript">// returns 'Satellite-Pro-U500'
+toUrlSafe('Satellite Pro U500');</code></pre>
+		</div>
+
+		<div class="api_item">
+			<h3 class="option">function()</h3>
+			<p>
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Requires</strong> <var>name</var> (function)<br />
+				<strong>Returns</strong> (string)
+			</p>
+			<p></p>
+			<pre><code class="javascript">// returns 'Satellite-Pro-U500'
+toUrlSafe('Satellite Pro U500');</code></pre>
+		</div>
+
+	</div>
+
+
+	<!-- SECTION_NAME -->
+	<div id="section_name" class="section">
+		<h1>Section Title</h1>
+		<p>Section Description</p>
+		<p><strong>Useful for:</strong> Modifying Behaviour, Customizing Transitions, Controlling Slides</p>
+
+
+		<h2>Section Subtitle</h2>
+		<p>Section sub description</p>
+		<ul class="list">
+			<li><var>fade</var> &mdash; A simple fade between slides</li>
+			<li><var>swipe</var> &mdash; A horizontal swipe from left to right or right to left, depending on whether you're going forward or backwards between slides</li>
+		</ul>
+
+
+
+		<h2>Building Your Own Transitions</h2>
+		<p>Adding your own transition is easy to do once you know the basics. Read on below to start building your own transitions.</p>
+
+		<div class="api_item">
+			<h3 class="option">function()</h3>
+			<p>
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Requires</strong> <var>name</var> (function)<br />
+				<strong>Returns</strong> (string)
+			</p>
+			<p></p>
+			<pre><code class="javascript">// returns 'Satellite-Pro-U500'
+toUrlSafe('Satellite Pro U500');</code></pre>
+		</div>
+
+		<div class="api_item">
+			<h3 class="option">function()</h3>
+			<p>
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Param</strong> <var>name</var> (string)<br />
+				<strong>Requires</strong> <var>name</var> (function)<br />
+				<strong>Returns</strong> (string)
+			</p>
+			<p></p>
+			<pre><code class="javascript">// returns 'Satellite-Pro-U500'
+toUrlSafe('Satellite Pro U500');</code></pre>
+		</div>
+
+
+		<h2>Additional Slide Information</h2>
+		<p>Included with the <var>from</var> and <var>to</var> objects is some additional data. Here is what's available to you.</p>
+		<p><strong>Usage:</strong> Each of these values are available in the <var>from</var> and <var>to</var> objects. You can access them by using <code>from.param</code> such as <code>from.id</code> will return the slide id of the <var>from</var> slide. Similarly, <code>to.id</code> will return the slide id of the <var>to</var> slide.</p>
+
+
+		<div class="api_item">
+			<h3 class="option">id</h3>
+			<p><strong>Param</strong> <var>id</var> (int)</p>
+			<p>This is the id &mdash; a.k.a. slide number &mdash; of the slide.</p>
+		</div>
+
+		<div class="api_item">
+			<h3 class="option">name</h3>
+			<p><strong>Param</strong> <var>name</var> (string)</p>
+			<p>This is the unique name of the slide. The unique name is pulled from the attribute you set in <code>config.slideNameAttr</code>.</p>
+		</div>
+
+		<div class="api_item">
+			<h3 class="option">id</h3>
+			<p><strong>Param</strong> <var>id</var> (int)</p>
+			<p>This is the id &mdash; a.k.a. slide number &mdash; of the slide.</p>
+		</div>
+
+		<div class="api_item">
+			<h3 class="option">name</h3>
+			<p><strong>Param</strong> <var>name</var> (string)</p>
+			<p>This is the unique name of the slide. The unique name is pulled from the attribute you set in <code>config.slideNameAttr</code>.</p>
+		</div>
+
+	</div>
+
+	<!-- SUPPORT -->
+	<div id="support" class="section">
+		<h1>Support</h1>
+		<p>eh. not so much.</p>
+
+		<h2>Sorry</h2>
+		<p>Unfortunately, we do not offer any support at the moment. <strong>AllTheHaxx Lua API</strong> is made for ease of use and we encourage you to learn it on your own!</p>
+	</div>
+
+
+	<!-- LICENSE -->
+	<div id="license" class="section">
+		<h1>License</h1>
+		<p>What you can and can't do with this project.</p>
+
+		<h2>Released under MIT License</h2>
+		<p>We have released <strong>AllTheHaxx Lua API</strong> under the MIT License which is stated as:</p>
+		<pre><code class="no-highlight">Copyright &copy; 2011 by _Company_
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</code></pre>
+	</div>
+
+	<div id="footer">
+		<p>Copyright &copy; 2011 <a href="#license">MIT License</a> by <a href="_Company URL_">_Company_</a></p>
+	</div>
+
+</div>
+
+</body>
+</html>
