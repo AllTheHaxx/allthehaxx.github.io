@@ -312,8 +312,67 @@ end</code></pre>
 			<strong>TODO: Taken from old docs, i think there are more events now :D</strong>
 
 			<h2>Functions and variables</h2>
+			<p><strong>There are also functions and variables that our API offers to interact with the game.</strong></p>
 
-			<p><strong>There are also functions and variables that our API offers to interact with the game.</strong>
+			<h2>Custom Types</h2>
+			<p>Last but not least: Custom types. These are used in Teeworlds only, and are very useful for certain things. For example vectors can be used to store coordinates, colors and similar stuff.</p>
+
+			<div class="api_item">
+			<h3 class="option">vec2</h3>
+			<p>
+				<strong>Initialization: </strong><code>MyVector = vec2(x, y)</code><br \>
+				<strong>Example Usage: </strong>Useful to store coordinates, velocities and more.<br \>
+				<strong>Notes: </strong>You may use operators on this type. For example <code>vec2(5, 10)+vec2(10, 20)</code> would equal <code>vec2(15, 30)</code>. x and y are integers, for floats there is another type.
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">vec2f</h3>
+			<p>
+				<strong>Initialization: </strong><code>MyVector = vec2f(x, y)</code><br \>
+				<strong>Example Usage: </strong>Useful to store coordinates, velocities and more.<br \>
+				<strong>Notes: </strong>You may use operators on this type. For example <code>vec2f(5.5, 10.5)+vec2f(10.5, 20.5)</code> would equal <code>vec2f(16.0, 31.0)</code>. x and y are floats, for integers there is another type.
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">vec3</h3>
+			<p>
+				<strong>Initialization: </strong><code>MyVector = vec3(x, y, z)</code><br \>
+				<strong>Example Usage: </strong>Useful to store color values (rbg values) and more.<br \>
+				<strong>Notes: </strong>You may use operators on this type. For example <code>vec3(5, 10, 20)+vec3(10, 20, 40)</code> would equal <code>vec3(15, 30, 80)</code>. x, y and z are integers, for floats there is another type.
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">vec3f</h3>
+			<p>
+				<strong>Initialization: </strong><code>MyVector = vec3f(x, y, z)</code><br \>
+				<strong>Example Usage: </strong>Useful to store color values (rbg values) and more.<br \>
+				<strong>Notes: </strong>You may use operators on this type. For example <code>vec3f(5.0, 10.0, 20.0)+vec3f(10.0, 20.0, 40.0)</code> would equal <code>vec3f(15.0, 30.0, 80.0)</code>. x, y and z are floats, for integers there is another type.
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">vec4</h3>
+			<p>
+				<strong>Initialization: </strong><code>MyVector = vec4(r, b, g, a)</code><br \>
+				<strong>Example Usage: </strong>Useful to store color values (rbga values(with alpha value)) and more.<br \>
+				<strong>Notes: </strong>You may use operators on this type. For example <code>vec4(5, 10, 20, 40)+vec4(10, 20, 40, 80)</code> would equal <code>vec4(15, 30, 80, 160)</code>. r, b, g and a are integers, for floats there is another type.
+			</p>
+			</div>
+
+			<div class="api_item">
+			<h3 class="option">vec4f</h3>
+			<p>
+				<strong>Initialization: </strong><code>MyVector = vec4f(r, b, g, a)</code><br \>
+				<strong>Example Usage: </strong>Useful to store color values (rbga values(with alpha value)) and more.<br \>
+				<strong>Notes: </strong>You may use operators on this type. For example <code>vec4f(5.0, 10.0, 20.0, 40.0)+vec4f(10.0, 20.0, 40.0, 80.0)</code> would equal <code>vec4f(15.0, 30.0, 80.0, 160.0)</code>. r, b, g and a are floats, for integers there is another type.
+			</p>
+			</div>
+
+			<p><strong>Note for vectors: </strong>Some Teeworlds functions or variables representing vectors. Now you know how to deal with them.</p>
+
 	</div>
 
 	<!-- SUPPORT -->
