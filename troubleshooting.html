@@ -4,7 +4,7 @@
 		<meta charset='utf-8'>
 		<meta http-equiv="X-UA-Compatible" content="chrome=1">
 		
-		<title>AllTheHaxx Teeworlds (ATH) - the client with the keck! &gt; Troubleshooting</title>
+		<title>AllTheHaxx Teeworlds (ATH) - the client with the keck! » Troubleshooting</title>
 		<link href="https://github.com/AllTheHaxx/AllTheHaxx/raw/master/other/icons/AllTheHaxx.ico" rel="shortcut icon" type="image/x-icon" />
 
 		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
@@ -16,7 +16,7 @@
     <header>
       <div class="container">
         <h1>Troubleshooting</h1>
-        <h2>Getting Error 0xC000007B when starting</h2>
+        <h2 class="headline-red">Getting Error 0xC000007B when starting</h2>
         <blockquote>
           This error means that you are mixing up 32 bit environments with 64 ones, i.e. having a 64-bit executable but 32-bit DLLs in one directory.<br>
           Never do that! If you downloaded say the 64 bit version of the client, stick to that.<br>
@@ -24,23 +24,27 @@
         </blockquote>
         <br>
 
-        <h2>Everything looks "zoomed in" so that you can't click anything</h2>
+        <h2 class="headline-red">Everything looks "zoomed in" so that you can't click anything</h2>
         <blockquote>
           This usually appears when your screen has got some weird resolution that nobody else in the world is using.<br>
           To fix it, you can make the interface smaller:<br>
-          - Open the gameconsole by pressing F1<br>
-          - Type `ui_scale 80` and press enter<br>
-          - Go to Settings → Graphics to change either the resolution to something sane (16:9 recommended) or adjust the ui scale<br>
+          <ul>
+            <li>Open the gameconsole by pressing F1</li>
+            <li>Type `ui_scale 80` and press enter</li>
+            <li>Go to Settings → Graphics to change either the resolution to something sane (16:9 recommended) or adjust the ui scale</li>
+          </ul>
         </blockquote>
         <br>
         
-        <h2>Doesn't start on Linux</h2>
+        <h2 class="headline-red">Doesn't start on Linux</h2>
         <blockquote>
           If you are trying to run the pre-built client on linux and it just doesn't do anything, it's most likely you'll have to compile it yourself.<br>
           To identify the problem: open a terminal, cd into to your AllTheHaxx folder and type ./AllTheHaxx<br>
-          It will say you what's going on.<br>
-          - If it says 'No Permission', do `chmod +x AllTheHaxx` and run it again. Don't use sudo!<br>
-          - If it indicates a wrong libc version or something similar, there is no easy fix than compiling yourself.<br>
+          It will say you what's going on.
+          <ul>
+            <li>If it says 'No Permission', do `chmod +x AllTheHaxx` and run it again. Don't use sudo!</li>
+            <li>If it indicates a wrong libc version or something similar, there is no easy fix than compiling yourself.</li>
+          </ul>
         </blockquote>
         <br>
 

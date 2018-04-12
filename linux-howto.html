@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		
+		<title>AllTheHaxx Teeworlds (ATH) - the client with the keck! » Linux HowTo</title>
+		<link href="https://github.com/AllTheHaxx/AllTheHaxx/raw/master/other/icons/AllTheHaxx.ico" rel="shortcut icon" type="image/x-icon" />
+
+		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+	</head>
+
+	<body>
+    <header>
+      <div class="container">
+        <h1>Linux HowTo</h1>
+        <h2 class="headline-yellow">Installing from the AUR</h2>
+        <blockquote>
+        	There are multiple ways to install software from the AUR. The first (and recommended) one is using a tool like aurman, yaourt or trizen:
+        	<ul class="shell_command">
+        		<li>aurman -S allthehaxx</li>
+        	</ul>
+
+        	<br>
+        	Another way is cloning the AUR-repo, then building and installing the package manually:
+        	<ul class="shell_command">
+        		<li>git clone https://aur.archlinux.org/allthehaxx.git allthehaxx-aur</li>
+        		<li>cd allthehaxx-aur</li>
+        		<li>makepkg -s</li>
+        		<li>sudo pacman -U allthehaxx-VERSION-x86_64.pkg.tar.xz</li>
+        	</ul>
+        </blockquote>
+        <br>
+
+        <h2 class="headline-yellow">Installing the pre-built package (Arch Linux)</h2>
+        <blockquote>
+        	Using this method is discouraged as the client will not get updated automatically.<br>
+        	The following commands download the latest binary package and its signature, import Henningstone's signing key and give it local trust so pacman can verify the package, and finally install the package. (alternatively, you can download the latest release manually <a href="https://github.com/AllTheHaxx/AllTheHaxx/releases/latest" target="_blank">»here</a> and skip the first 3 steps)
+        	<ul class="shell_command">
+        		<li>latestPkg=$(curl -s https://api.github.com/repos/AllTheHaxx/AllTheHaxx/releases | grep name | grep 'x86_64[.]pkg.tar.xz' | head -n 1 | cut -d '"' -f 4)
+        		<li>wget $(curl -s https://api.github.com/repos/AllTheHaxx/AllTheHaxx/releases | grep browser_download_url | grep 'x86_64[.]pkg.tar.xz' | head -n 1 | cut -d '"' -f 4)</li>
+        		<li>wget $(curl -s https://api.github.com/repos/AllTheHaxx/AllTheHaxx/releases | grep browser_download_url | grep 'x86_64[.]pkg.tar.xz.sig' | head -n 1 | cut -d '"' -f 4)</li>
+        		<li>sudo pacman-key --recv-keys CB6DA7FC</li>
+        		<li>sudo pacman-key --lsign-key CB6DA7FC</li>
+        		<li>pacman -U $latestPkg</li>
+        	</ul>
+        </blockquote>
+        <br>
+        
+        <h2 class="headline-yellow">Installing from the PPA</h2>
+        <blockquote>
+        	coming soon
+        </blockquote>
+        <br>
+
+        <h2 class="headline-yellow">Installing the binary package (Debian/Ubuntu)</h2>
+        <blockquote>
+        	coming soon
+        </blockquote>
+        <br>
+        
+
+        <br><br><a href="https://allthehaxx.github.io">« back</a>
+      </div>
+    </header>
+  </body>
+</html>
