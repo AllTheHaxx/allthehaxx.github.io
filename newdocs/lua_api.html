@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>ATH Docs</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">
+    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+</head> 
+
+<body id="body" class="body-green">
+    <div class="page-wrapper">
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">ATH </span><span class="text-bold">Lua API</span>
+                        </a>
+                    </h1>
+                </div><!--//branding-->
+                <ol class="breadcrumb">
+                    <li class="active">Lua API</li>
+                </ol>
+            </div><!--//container-->
+        </header><!--//header-->
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-user"></i> Lua API</h1>
+                    <div class="meta"><i class="fa fa-clock-o"></i> Current Revision: Mar 18th, 2018</div>
+                    <div class="meta"><i class="fa fa-code-fork"></i> Applies to ATH version: 0.36 (pending)</div>
+                </div><!--//doc-header-->
+                <div class="doc-body">
+                    <div class="doc-content">
+                        <div class="content-inner">
+                            <section id="getting-started-section" class="doc-section">
+                                <h2 class="section-title">Getting started with Lua</h2>
+                                <div class="section-block">
+                                    <p>
+                                        Scripts for ATH are created using the Lua programming language version 5.1.
+                                        For anything related to the language itself, refer to the plentiful Lua Reference Manual, please (in this document referred to as 'LRM').<br>
+                                    </p>
+                                    <a href="https://www.lua.org/manual/5.1/" class="btn btn-green" target="_blank"><i class="fa fa-book"></i> Lua 5.1 Reference Manual</a>
+                                    <br><br>
+                                    <p>Since learning to code is mainly done by reading and writing code, it's a good idea to look at some existing scripts and try to understand what they do:
+                                    </p>
+                                    <a href="https://github.com/AllTheHaxx/AllTheHaxx/tree/master/data/lua/Official" class="btn btn-primary" target="_blank"><i class="fa fa-download"></i> Up-to-date Official Scripts</a>
+                                    <a href="https://github.com/AllTheHaxx/Lua-Scripts" class="btn btn-primary" target="_blank"><i class="fa fa-download"></i> Collection of old Scripts</a>
+                                </div>
+                            </section><!--//getting-started-section-->
+
+
+                            <section id="prependix-section" class="doc-section">
+                                <h2 class="section-title">Prependix</h2>
+                                <div class="section-block">
+                                    <p>
+                                        This documentation gives a complete overview over the ATH Lua API. It contains all custom types, namespaces and methods that can be used in scripts.<br>
+                                        If you miss anything or have found an error, please let us know on our <a href="http://webchat.quakenet.org/?channels=AllTheHaxx">IRC-Channel</a> or <a href="https://discord.gg/ckZyPtS">Discord-Server</a>.
+                                    </p>
+                                    <p>
+                                        For every method in this documentation you will find a pseudo-cpp-like-style function header.
+                                        These are only there to show which types the methods return or expect and have nothing to do with the syntax used for scripting.<br>
+                                        Example:
+                                        <pre><font color="blue">void</font> <font color="green">HSplitBottom</font>(<font color="blue">float</font> Offset, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Top, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Bottom) [<font color="blue">const</font>]</pre>
+                                        <code class="language-">void</code> means that the function does not return anything<br>
+                                        <code class="language-">float</code> hints that a decimal number is allowed here (<code class="language-">int</code> would hint that only whole numbers are allowed)<br>
+                                        <code class="language-">out</code> tells you that the variable you pass here will be changed by the function to contain the result of the operation<br>
+                                        <code class="language-">UIRect</code> is the type of the variable that you must pass here<br>
+                                        <code class="language-">[const]</code> denotes that this methods does not change any of the object's attributes. This only applies to custom types.
+
+                                    </p>
+                                </div>
+                            </section><!--//prependix-section-->
+
+                            <section id="security-section" class="doc-section">
+                                <h2 class="section-title">Security</h2>
+                                <div id="security-permissions" class="section-block">
+                                    <h4 class="section-block">Permissions</h4>
+                                    <p>
+                                        There are a few things that you have to explicitly request from the client if you want to use them in your script. This is a security measure to let users know when a script wants to use possibly risky things.<br>Because these special things don't have to used commonly, it's kind of cumbersome to use. The following syntax has to be used at the very top of your script if you need one of these things:
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">--[[#!
+    #io
+    #os
+    #debug
+    #package      -- this on is pretty useless but included for completeness
+]]--#
+
+-- Use whatever you need, you don't have to list them all
+-- (it's actually good practice to use none whenever possible)</code></pre>
+                                    </div>
+                                </div>
+                                <div id="security-sandboxing" class="section-block">
+                                    <h4 class="section-block">Sandboxing</h4>
+                                    <p>
+                                        This section is to a certain extend also significant for people who solely use scripts, but not write them.<br>
+                                        ATH has mechanism's to ensure that no script can do damage to your system or yourself as a Teeworlds player (we can not be hold liable if that happens anyhow, though).<br>
+                                        The main security measure is protecting the user's filesystem by only allowing scripts access to one folder (and its subfolders) that the client provides specifically for this one script. We call this folder the 'lua filesystem sandbox', or for short just sandbox. Every script gets its own folder when it requests io permissions, and the name of this folder is the filename of the script. All these folders live in <var>%APPDATA%\Teeworlds\lua_sandbox</var> on Windows or <var>~/.teeworlds/lua_sandbox</var> on Linux. The client enforces all io operations a script could make to be redirected to this folder, and it is not possible to escape out of it.<br>
+                                        A second, less crucial, countermeasure against nasty scripts is deliberately limiting what scripts can do to/with the client. The first and foremost principle here is: it should not be possible to crash the client using Lua. It's just annoying and may irritate some people into thinking ATH was buggy (dat sarcasm tho…). Jokes aside, this second countermeasure also results in certain limits to the API, for example is it the reason for the absence of e.g. a function that lets a script execute F1 commands.<br>
+                                        If you're the kind of person that lives by the motto of "If it ain't broken, break it!", I would really much appreciate you report any exploits to this system, if you find some (we've done a thorough investigation already though, so it should be fairly safe).
+                                    </p>
+                                </div>
+                                <div id="security-builtin-replacement" class="section-block">
+                                    <h4 class="section-block">Builtin-replacement</h4>
+                                    <p>
+                                        For security reasons, certain builtins of Lua have been removed or replaced with custom functions that provide similar or slightly adapted functionality. Here is a list of these builtins, so don't be confused if you read about them in the Lua Reference Manual but they don't seem to work in ATH.
+                                    </p>
+                                    <table class="fixed">
+                                        <h5>Removed Functions</h5>
+                                        <tr>
+                                            <th width="22%" scope="col"></th>
+                                            <th width="22%" scope="col"></th>
+                                            <th width="22%" scope="col"></th>
+                                            <th width="22%" scope="col"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>require</td>
+                                            <td>io.popen</td>
+                                            <td>os.exit</td>
+                                            <td>debug.getregistry</td>
+                                        </tr>
+                                        <tr>
+                                            <td>module</td>
+                                            <td>io.input</td>
+                                            <td>os.execute</td>
+                                            <td>collectgarbage</td>
+                                        </tr>
+                                        <tr>
+                                            <td>load</td>
+                                            <td>io.output</td>
+                                            <td>os.remove</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>loadfile</td>
+                                            <td>io.stdin</td>
+                                            <td>os.rename</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>loadstring</td>
+                                            <td>os.setlocale</td>
+                                            <td>os.getenv</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <style>
+                                        td.align-topleft {
+                                            vertical-align: top !important;
+                                            text-align: left !important;
+                                        }
+                                    </style>
+                                    <table class="fixed">
+                                        <h5>Replaced Functions</h5>
+                                        <tr>
+                                            <th width="10%" scope="col"></th>
+                                            <th width="90%" scope="col"></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-topleft">print</td>
+                                            <td class="align-topleft"><p>the only relevant change is: print() will NOT auto-convert to string values, but raise an error when given a non-string value. This should force scripters to write their code more explicitly to help less experienced people catch mistakes in their scripts more easily. Use tostring() if you want to print non-string values.</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-topleft">dofile</td>
+                                            <td class="align-topleft"><p>has been replaced with <a class="scrollto" href="#global-import">Import</a>, thus does exactly the same.</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="align-topleft">io.open</td>
+                                            <td class="align-topleft"><p>The functionality of io.open has been improved and tailored to obey <a class="scrollto" href="#security-sandboxing">sandboxing rules</a>. The definition of io.open was changed to:<br>
+                                                <code class="language-lua">io.open(string filename [, string openmode [, bool shared]]) -> file|`nil`, string</code><br>
+                                                You have only access to your script's sandbox, or to the shared sandbox if 'shared' is given and <var>true</var>. If the file is to be opened in write mode, io.open will automatically create the path to the file for you if it doesn't exist.<br>Another change is that io.open now returns two values instead of one. The first is exactly the same as denoted in the LRM; the second return value is a string containing the path of the file ATH tried opening.<br>
+                                                The basic operation of io.open is exactly the same though, as the builtin is actually being used behind the scenes, so refer the the LRM for further information.
+                                            </p></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </section><!--//prependix-section-->
+                            <section id="custom-types" class="doc-section">
+                                <h2 class="section-title">Custom types</h2>
+                                <div id="vec2"  class="section-block">
+                                    <h3 class="block-title"><code>vec2</code></h3>
+                                    <p>
+                                        A two-dimensional vector (x and y coordinates). Commonly used for positions and directions.<br>
+                                        All vector classes implement lua's standard operators <code class="language-lua">+, -, *, /, ==, ~=, tostring</code>.
+                                    </p>
+                                    <br>
+                                        <h6>Attributes:</h6>
+                                        <code class="language-lua">x</code> / <code class="language-lua">u</code> – x-part of the vector<br>
+                                        <code class="language-lua">y</code> / <code class="language-lua">v</code> – y-part of the vector
+									<div id="vec2" class="section-block">
+										<div class="code-block">
+											<h6>Usage:</h6>
+											<pre><code class="language-lua">
+-- defining a vector
+MyVec = vec2(20.4, 30.6)
+
+-- outputting the vector as a human-readable string
+tostring(MyVec)  -- >  (20.4000|30.6000)
+
+-- doing arithmetics on the vector
+MyVec + vec2(1,2)  -- >  (21.4000|32.6000)  // addition – translating the vector
+MyVec - vec2(1,2)  -- >  (20.4000|30.6000)  // subtraction – equal to `MyVec + vec2(-1,-2)`
+MyVec * 2          -- >  (40.8000|61.2000)  // multiplication – upscaling the vector
+MyVec / 2          -- >  (10.2000|15.3000)  // division – downscaling the vector
+
+-- comparing vectors
+if MyVec == vec2(20.4, 30.6) then print("equal!") end      -- >  'equal!'
+if MyVec ~= vec2(13.3, 73.8) then print("not equal!") end  -- >  'not equal!'
+
+-- accessing attributes
+print(MyVec.x)  -- >  20,39999961853
+print(MyVec.y)  -- >  30,60000038147
+-- // note that these values are so fucked up due to floating point error! (google it)
+                                        </code></pre>
+										</div><!--//code-block-->
+									</div><!--//section-block-->
+									<div class="callout-block callout-info">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-exclamation"></i>
+                                        </div><!--//icon-holder-->
+                                        <div class="content">
+                                            <h4 class="callout-title">Note:</h4>
+                                            <p>
+                                                All these operators are implemented into the other types of vectors (<a class="scrollto" href="#vec3">vec3</a> and <a class="scrollto" href="#vec4">vec4</a>) either.<br>
+                                                As such, they will not be explained again in the following sections.</p>
+                                        </div><!--//content-->
+                                    </div>
+                                </div><!--//section-block-->
+                                <div id="vec3"  class="section-block">
+                                    <h3 class="block-title"><code>vec3</code></h3>
+                                    <p>
+                                        A three-dimenstional vector, in Teeworlds commonly used for colors
+                                    </p>
+                                    <br>
+                                    <p>
+                                        <h6>Attributes:</h6>
+                                        <code class="language-lua">x</code> / <code class="language-lua">r</code> / <code class="language-lua">h</code> – x-part of the vector / the red-part of the RGB-color / the hue-part of the HSL-color<br>
+                                        <code class="language-lua">y</code> / <code class="language-lua">g</code> / <code class="language-lua">s</code> – y-part of the vector / the green-part of the RGB-color / the saturation-part of the HSL-color<br>
+                                        <code class="language-lua">z</code> / <code class="language-lua">b</code> / <code class="language-lua">l</code> – z-part of the vector / the blue-part of the RGB-color / the lighting-part of the HSL-color
+                                    </p>
+									<div class="code-block">
+										<h6>Usage:</h6>
+										<pre><code class="language-lua">
+MyVec = vec3(20.4, 30.6, 40.8)
+print(Vector3.x, Vector3.y, Vector3.z)  -- >  20,39999961853    30,60000038147    40,799999237061
+print(Vector3.r, Vector3.g, Vector3.b)  -- >  20,39999961853    30,60000038147    40,799999237061
+print(Vector3.h, Vector3.s, Vector3.l)  -- >  20,39999961853    30,60000038147    40,799999237061
+-- // again floating-point-error!
+
+MyVec.x = 1
+MyVec.g = 2
+MyVec.l = 3
+print(Vector3.x, Vector3.y, Vector3.z)  -- >  1    2    3
+print(Vector3.r, Vector3.g, Vector3.b)  -- >  1    2    3
+print(Vector3.h, Vector3.s, Vector3.l)  -- >  1    2    3
+
+</code></pre>
+									</div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="vec4"  class="section-block">
+                                    <h3 class="block-title"><code>vec4</code></h3>
+                                    <p>
+                                        A four-dimensional vector, commonly used for RGBA-colors (other rare use case: three dimensional vector with time)
+                                    </p>
+                                    <br>
+                                    <p>
+                                        <h6>Attributes:</h6>
+                                        <code class="language-lua">r</code> / <code class="language-lua">x</code> – red-part of the RGBA-colors / the x-part of the four-dimensional vector<br>
+                                        <code class="language-lua">g</code> / <code class="language-lua">y</code> – green-part of the RGBA-colors / the y-part of the four-dimensional vector<br>
+                                        <code class="language-lua">b</code> / <code class="language-lua">z</code> – blue-part of the RGBA-colors / the z-part of the four-dimensional vector<br>
+                                        <code class="language-lua">a</code> / <code class="language-lua">w</code> – alpha-part of the RGBA-colors / the time-part of the four-dimensional vector
+
+                                    </p>
+									<div class="code-block">
+										<h6>Usage:</h6>
+										<pre><code class="language-lua">
+Vector4 = vec4(20.4, 30.6, 40.8, 50.1)
+
+-- To get the data of a vec4 simply do this with:
+print(Vector4.x,Vector4.y,Vector4.z)  -- >  20,39999961853    30,60000038147    40,799999237061
+print(Vector4.r,Vector4.g,Vector4.b,Vector4.a)  -- >  20,39999961853    30,60000038147    40,799999237061    50,099998474121
+-- I don't know if i used this rightly.
+print(Vector4.w,Vector4.u,Vector4.v)  -- >  50,099998474121    40,799999237061    50,099998474121
+-- I don't know why its returning such unrounded values.
+
+</code></pre>
+									</div><!--//code-block-->
+                                </div><!--//section-block-->
+								<div id="uirect"  class="section-block">
+                                    <p><code>UIRect</code></p>
+                                    <p>
+                                        Represents a rectangle used for user interface rendering
+                                    </p>
+                                    <br>
+                                    <p>
+                                        <h6>Attributes:</h6>
+                                        <code class="language-lua">x</code> – the x-coordinate<br>
+                                        <code class="language-lua">y</code> – the y-coordinate<br>
+                                        <code class="language-lua">w</code> – the width<br>
+                                        <code class="language-lua">h</code> – the height
+                                    </p>
+                                    <p>
+                                        <h6>Methods:</h6>
+                                        
+<code class="language-lua">HSplitMid</code> splits the rect horizontally in the middle, putting the resulting parts into <var>Top</var> and <var>Bottom</var>
+<pre><font color="blue">void</font> <font color="green">HSplitMid</font>(<font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Top, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Bottom) [<font color="blue">const</font>]</pre>
+
+<code class="language-lua">HSplitTop</code> splits the rect horizontally at <var>Offset</var> units from the top, putting the resulting parts into <var>Top</var> and <var>Bottom</var>
+<pre><font color="blue">void</font> <font color="green">HSplitTop</font>(<font color="blue">float</font> Offset, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Top, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Bottom> [<font color="blue">const</font>]</pre>
+
+<code class="language-lua">HSplitBottom</code> splits the rect horizontally at <var>Offset</var> units from the bottom, putting the resulting parts into <var>Top</var> and <var>Bottom</var>
+<pre><font color="blue">void</font> <font color="green">HSplitBottom</font>(<font color="blue">float</font> Offset, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Top, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Bottom) [<font color="blue">const</font>]</pre>
+
+<code class="language-lua">VSplitMid</code> splits the rect vertically in the middle, putting the resulting parts into <var>Left</var> and <var>Right</var>
+<pre><font color="blue">void</font> <font color="green">VSplitMid</font>(<font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Left, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Right) [<font color="blue">const</font>]</pre>
+
+<code class="language-lua">VSplitLeft</code> splits the rect vertically at <var>Offset</var> units from the left, putting the resulting parts into <var>Left</var> and <var>Right</var>
+<pre><font color="blue">void</font> <font color="green">VSplitLeft</font>(<font color="blue">float</font> Offset, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Left, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Right) [<font color="blue">const</font>]</pre>
+
+<code class="language-lua">VSplitRight</code> splits the rect vertically at <var>Offset</var> units from the right, putting the resulting parts into <var>Left</var> and <var>Right</var>
+<pre><font color="blue">void</font> <font color="green">VSplitRight</font>(<font color="blue">float</font> Offset, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Left, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Right) [<font color="blue">const</font>]</pre>
+
+<code class="language-lua">HMargin</code> cuts away <var>Offset</var> units from both the top and the bottom of the rect, and stores the result in <var>Dest</var>
+<pre><font color="blue">void</font> <font color="green">HMargin</font>(<font color="blue">float</font> Offset, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Dest) [<font color="blue">const</font>]</pre>
+
+<code class="language-lua">VMargin</code> cuts away <var>Offset</var> units from both the right and the left of the rect, and stores the result in <var>Dest</var>
+<pre><font color="blue">void</font> <font color="green">VMargin</font>(<font color="blue">float</font> Offset, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Dest) [<font color="blue">const</font>]</pre>
+
+<code class="language-lua">Margin</code> cuts away <var>Offset</var> units from all sides of the rect and stores the result in <var>Dest</var>
+<pre><font color="blue">void</font> <font color="green">Margin</font>(<font color="blue">float</font> Offset, <font color="grey">out</font> <a class="scrollto" href="#uirect">UIRect</a> Dest) [<font color="blue">const</font>]</pre>
+
+<code class="language-lua">copy</code> creates a new UIRect that is equal to the current one, and returns a reference to this new copy
+<pre><a class="scrollto" href="#uirect">UIRect</a> <font color="green">copy</font>() [<font color="blue">const</font>]</pre>
+
+                                    </p>
+									<div class="code-block">
+										<h6>Usage:</h6>
+										<pre><code class="language-lua">
+NewRect = UIRect(0,0,0,0) -- UIRect(x, y, width, height)
+
+-- To get an UIRect which is as large as the entire screen (=teeworlds window), use:
+Screen = Game.Ui:Screen()
+-- IMPORTANT! If you want to COPY a rect use:
+Screen2 = Screen:copy()
+-- insteed of:
+Screen2 = Screen
+-- Using the copy function is necessary because otherwise Screen2 and Screen would both point to the same UIRect, thus chaning one would change the other!
+
+-- Output (without copy):
+local Screen = Game.Ui:Screen()
+local MainView = Screen
+print(MainView.x,MainView.y,MainView.h,MainView.w)  -- >  0    0    600    960
+MainView.x = 100
+print(MainView.x,MainView.y,MainView.h,MainView.w)  -- >  100    0    600    960 
+print(Screen.x,Screen.y,Screen.h,Screen.w)  -- >  100    0    600    960 
+
+-- Output (with copy):
+local Screen = Game.Ui:Screen()
+local MainView = Screen:copy()
+print(MainView.x,MainView.y,MainView.h,MainView.w)  -- >  0    0    600    960
+MainView.x = 100
+print(MainView.x,MainView.y,MainView.h,MainView.w)  -- >  100    0    600    960 
+print(Screen.x,Screen.y,Screen.h,Screen.w)  -- >  0    0    600    960 
+
+-- Now the complicated things about the UIRect... :)
+-- To split a rect horizontally, defining a margin from top, you can use:
+NewRect = UIRect(0,0,100,100)
+local NewRect1 = UIRect(0,0,0,0)
+local NewRect2 = UIRect(0,0,0,0)
+NewRect:HSplitTop(10,NewRect1,NewRect2) -- Splits NewRect by 10 pixel from TOP in NewRect1 and NewRect2
+print(NewRect1.x,NewRect1.y,NewRect1.w,NewRect1.h)  -- >  0    0    100    10  -- This is the top part which's size you've defined (here 10)
+print(NewRect2.x,NewRect2.y,NewRect2.w,NewRect2.h)  -- >  0    10    100    90  -- This is the rest of the old rect, thus the bottom part
+-- You can also split rects with: NewRect:HSplitBottom(N,UIRect1,UIRect2) and NewRect:HSplitMid(N,UIRect1,UIRect2) the principe is the same. (N = pixels, UIRect1 = 1st UIRect, UIRect2 = 2nd UIRect)
+
+-- To split a rect vertically, defining a margin from the right, you can use:
+NewRect = UIRect(0,0,100,100)
+local NewRect1 = UIRect(0,0,0,0)
+local NewRect2 = UIRect(0,0,0,0)
+NewRect:VSplitRight(10,NewRect1,NewRect2) -- Splits NewRect by 10 pixel from the right in NewRect1 and NewRect2
+print(NewRect1.x,NewRect1.y,NewRect1.w,NewRect1.h)  -- >  0    0    90    100  -- This is now right part of the old rect
+print(NewRect2.x,NewRect2.y,NewRect2.w,NewRect2.h)  -- >  90    0    10    100  -- This is the rest of the old rect
+-- You can also split rects with: NewRect:VSplitLeft(N,UIRect1,UIRect2) and NewRect:VSplitMid(N,UIRect1,UIRect2) the principe is the same. (N = pixels, UIRect1 = 1st UIRect, UIRect2 = 2nd UIRect)
+
+-- You can also cut away a margin at multiple sides of the rect, spacing it out evenly:
+-- For a margin all around the rect:
+NewRect = UIRect(0,0,100,100)
+NewRect:Margin(10,NewRect) -- Modifies 'NewRect' to contain the result
+print(NewRect.x,NewRect.y,NewRect.w,NewRect.h)  -- >  10    10    80    80
+
+-- For a margin from the right and left:
+NewRect = UIRect(0,0,100,100)
+NewRect:VMargin(10,NewRect) -- Returns the new Rect in NewRect
+print(NewRect.x,NewRect.y,NewRect.w,NewRect.h) -- >  10    0    80    100
+
+-- And for a margin from the top and bottom:
+NewRect = UIRect(0,0,100,100)
+NewRect:HMargin(10,NewRect) -- Returns the new Rect in NewRect
+print(NewRect.x,NewRect.y,NewRect.w,NewRect.h)  -- >  0    10    100    80		
+</code></pre>
+									</div><!--//code-block-->
+                                    <p>
+                                        <h6>See also:</h6>
+                                        <a href="#game-ui-screen">Game.Ui:Screen</a><br>
+                                        <a href="#game-rendertools-drawuirect">Game.RenderTools:DrawUIRect</a>
+                                    </p>
+                                </div><!--//section-block-->
+                                <div class="callout-block callout-danger">
+                                    <div class="icon-holder">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </div><!--//icon-holder-->
+                                    <div class="content">
+                                        <h4 class="callout-title">Common mistake</h4>
+                                        <p>
+                                            Assigning one UIRect variable to another one will just copy the reference, not the object!<br>
+                                            That means <i>both</i> variables will actually point to the <i>same</i> UIRect, thus modifing one will also modify the other.<br><br>
+                                            To avoid this, use the <code class="language-lua">copy</code> method.
+                                        </p>
+                                    </div><!--//content-->
+                                </div>
+
+
+								<div id="quad_item" class="section-block">
+                                    <h3 class="block-title">QuadItem</h3>
+                                    <p>The QuadItem is used for drawing quads (geometric shapes with 4 corners).
+                                    </p>
+									<div class="code-block">
+										<h6>Usage:</h6>
+										<pre><code class="language-lua">MyQuad = QuadItem(0,0,200,400) -- QuadItem(x,y,width,height)
+-- Prepares a quad at the coordinates x and y with the given width and height.
+-- It's not possible to change a QuadItem after it has been created.
+</code></pre>
+									</div><!--//code-block-->
+                                </div><!--//section-block-->
+								<div id="line_item"  class="section-block">
+                                    <h3 class="block-title">LineItem</h3>
+                                    <p>The LineItem is used for drawing lines. Like the QuadItem, the LineItem don't have any functions or data.
+                                    </p>
+									<div class="code-block">
+										<h6>Usage:</h6>
+										<pre><code class="language-lua">MyLine = LineItem(0,0,200,400) -- LineItem(x1,y1,x2,y2)
+-- Prepares a line from coordinates (x1|y1) to (x2|y2).
+-- It's not possible to change a LineItem after it has been created.
+</code></pre>
+									</div><!--//code-block-->
+                                </div><!--//section-block-->
+								<div id="button_container"  class="section-block">
+                                    <h3 class="block-title">ButtonContainer</h3>
+                                    <p>ButtonContainer's are used to uniquely identify buttons.
+                                    </p>
+									<div class="code-block">
+										<h6>Usage:</h6>
+										<pre><code class="language-lua">MyBC = ButtonContainer()
+</code></pre>						
+									</div><!--//code-block-->
+									<div class="callout-block callout-success">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-thumbs-up"></i>
+                                        </div><!--//icon-holder-->
+                                        <div class="content">
+                                            <h4 class="callout-title">Useful Tip:</h4>
+                                            <p>ButtonContainer's are not meant to be used directly. We've written the handy <a class="scrollto" href="#libs-containers">containers</a> lib to make your lifes easier.</p>
+                                        </div><!--//content-->
+                                    </div>
+                                </div><!--//section-block-->
+								<div id="editbox_container"  class="section-block">
+                                    <h3 class="block-title">EditboxContainer</h3>
+                                    <p>EditboxContainer's are used to uniquely identify editboxes and hold their text.
+                                    </p>
+									<div class="code-block">
+										<h6>Usage:</h6>
+										<pre><code class="language-lua">MyEBC = EditboxContainer()
+-- To get the current string of an editbox use:
+print(MyEBC:GetString())  -- >    (Its empty :3)
+
+-- To modify the string use:
+MyEBC = EditboxContainer()
+print(MyEBC:GetString())  -- >
+MyEBC:SetString("Hello World")  
+print(MyEBC:GetString())  -- >  Hello World
+</code></pre>
+									</div><!--//code-block-->
+                                     <div class="callout-block callout-success">
+                                        <div class="icon-holder">
+                                            <i class="fa fa-thumbs-up"></i>
+                                        </div><!--//icon-holder-->
+                                        <div class="content">
+                                            <h4 class="callout-title">Useful Tip:</h4>
+                                            <p>The <a class="scrollto" href="#libs-containers">containers</a> lib can also handle EditboxContainer's.</p>
+                                        </div><!--//content-->
+                                    </div>
+
+                                </div><!--//section-block-->
+								<div id="teerenderinfo"  class="section-block">
+                                    <h3 class="block-title">TeeRenderInfo</h3>
+                                    <p>TeeRenderInfo keeps all information necessary to render a tee.</p>
+									<div class="code-block">
+										<h6>Usage:</h6>
+										<pre><code class="language-lua">MyTee = TeeRenderInfo() -- no parameters!
+MyTee.Texture = Game.Players(Game.LocalCID).RenderInfo.Texture
+MyTee.ColorBody = Game.Players(Game.LocalCID).RenderInfo.ColorBody
+MyTee.ColorFeet = Game.Players(Game.LocalCID).RenderInfo.ColorFeet
+MyTee.Size = Game.Players(Game.LocalCID).RenderInfo.Size
+MyTee.GotAirJump = Game.Players(Game.LocalCID).RenderInfo.GotAirJump
+</code></pre>
+									</div><!--//code-block-->
+                                </div><!--//section-block-->
+                            </section><!--//doc-section-->
+                            
+                            <section id="real-api" class="doc-section">
+                                <h2 class="section-title">Custom Functions and Data</h2>
+                                <div class="section-block">
+                                    <p>
+                                        ATH's Lua API is organized in so-called 'blocks' of which each provides you with variables and functions of one specific part of the client.<br>
+                                        These blocks are defined in the <a href="https://github.com/AllTheHaxx/AllTheHaxx/blob/master/src/engine/client/lua_apidef.cpp#L248" target="_blank">client's source code</a> – if you take a look at it you'll see why we call it blocks :)
+                                    </p>
+                                    
+                                </div><!--//section-block-->
+
+                                <!-- BEGIN global functions -->
+                                <h3>Global functions</h3>
+                                <div id="global-setscripttitle" class="section-block">
+                                    <h6 class="block-title"><code>SetScriptTitle(string NewTitle)</code></h6>
+                                    <p>Sets the title of this script to the given string. The script title will be displayed in the right section of the Lua settings menu when your script is selected.<br><br>
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">SetScriptTitle("Really Cool Script")
+function MyButtonWasClicked()
+    -- imagine this function gets called on a button press
+    SetScriptTitle("Much Cooler Script!")
+end
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="global-setscriptinfo" class="section-block">
+                                    <h3 class="block-title"><code>SetScriptInfo(string NewInfo)</code></h3>
+                                    <p>Sets the info of this script to the given string. The script info will be displayed in the right section of the Lua settings menu below the title when your script is selected.
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">SetScriptInfo("This script is cooler than you'd believe!")
+function MyButtonWasClicked()
+    -- imagine this function gets called on a button press
+    SetScriptInfo("HOLY SHIT IT JUST GOT EEEVEN COOLER DAMN!!1!")
+end
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div class="callout-block callout-info">
+                                    <div class="icon-holder"><i class="fa fa-info-circle"></i></div><!--//icon-holder-->
+                                    <div class="content">
+                                        <h4 class="callout-title">The old method</h4>
+                                        <p>SetScriptTitle and SetScriptInfo were introduced in ATH 0.36 (3600) and are not available in older versions, that's why this note is here.<br><br>
+                                            The old way of doing it was by assigning your title/info to a variable with the name 'g_ScriptTitle' bzw 'g_ScriptInfo' at the very top of your script, but this way it was not possible to change it dynamically after the script had been loaded.<br>
+                                            It is still possible to use the old method, but mainly for compatibility with older scripts. It has been marked as deprecated and will most likely be removed in a future version.
+                                        </p>
+                                    </div><!--//content-->
+                                </div><!--//callout-->
+                                <div class="callout-block callout-warning">
+                                    <div class="icon-holder"><i class="fa fa-exclamation-triangle"></i></div><!--//icon-holder-->
+                                    <div class="content">
+                                        <h4 class="callout-title">Possible confusion</h4>
+                                        <p>If you persist on using the old method, note that it will take precedence over the new method! That means, if you assign anything to e.g. g_ScriptTitle, that will be the script title regardless of any SetScriptTitle calls in the global scope!
+                                        </p>
+                                    </div><!--//content-->
+                                </div><!--//callout-->
+
+
+                                <div id="global-checkversion" class="section-block">
+                                    <h6 class="block-title"><code>CheckVersion(int MinVersion [, int MaxVersion])</code></h6>
+                                    <p>Will raise an error if the client's version is not within MinVersion and MaxVersion. (MaxVersion is actually optional; if it's not given we will only check for the minimum version).<br>
+                                        The version must be given in numerical version notation, that is, just leave the dots and the leading zero out and pad it to 4 digits with zeros at the end.<br>
+                                        Example:<br>
+                                        0.33 → 3300<br>
+                                        0.34 → 3400<br>
+                                        0.34.1 → 3410<br>
+                                        0.36.3.1 → 3631 (this only appears in the case of fixup-releases)
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">CheckVersion(3600) -- check if SetScriptTitle is available
+SetScriptTitle("Script that only runs on ATH >= 0.36")
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="global-throw" class="section-block">
+                                    <h6 class="block-title"><code>throw(string ErrorMessage)</code></h6>
+                                    <p>This does the same as Lua's builtin <a href="http://www.lua.org/manual/5.1/manual.html#pdf-error" target="_blank">error</a> function, but continues execution instead of jumping out. This allows you to add for example warnings to your script's exceptions list without actually breaking the script.
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">if SomeValue != SomeOtherValue then
+    throw("WARNING: 'this' does not equals 'that'. 42 will be unavailable.")
+end
+print("This print will still get executed")
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="global-import" class="section-block">
+                                    <h6 class="block-title"><code>Import(string what)</code> <var>-&gt; bool [, string]</var></h6>
+                                    <p>Import allows you to integrate external scripts into your script. It is most commonly used to import <a class="scrollto" href="#custom-lua-libs">ATH-lua-libs</a>, but you can import any '.lua' file that is available to ATH (see '<a class="scrollto" href="#security-sandboxing">Sandboxing</a>'). Import() will do its best to find what you asked for, so it's quite easy to use. You can even omit the '.lua' file extension! :)<br><br>
+                                        First, Import() will look in the folder that your script is in. If it doesn't find it there, it will look for a ATH-lua-lib with the given name. If that doesn't exist either, it will look into the lua root directory (&lt;path_to_your_AllTheHaxx&gt;/lua). If that fails too, it will return <var>false</var>.<br>
+                                        If Import() happens to find a lua file matching your request though, it will link it into the execution environment of the calling script. This makes all global variables of the imported script available to your script (only the really global ones, not the script-local variables!). When the imported script has finished execution of its global scope, Import() will return <var>true</var> and the path of the file it just imported.
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">if not Import("containers") then  -- ATH-lua-lib
+    error("failed to load containers lib!")
+end
+if not Import("stringutils")  -- another ATH-lua lib
+    error("failed to load stringutils lib")
+end
+if not Import("./MyCustomFile.lua") then  -- a custom external file to be included in your script
+    error("failed to import MyCustomFile.lua")
+end
+print("everything went flawlessly!")
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="global-killscript" class="section-block">
+                                    <h6 class="block-title"><code>KillScript()</code></h6>
+                                    <p>Calling this function does the equivalent of clicking the "Deactivate" button of your script: it will deactivate it. Note that the <a class="scrollto" href="#events-onscriptunload">OnScriptUnload</a> function <i>will</i> be called.
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">if EverythingIsBoring then
+    KillScript()
+end
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="global-listdir" class="section-block">
+                                    <h6 class="block-title"><code>Listdir(string directory, string/function callback)</code></h6>
+                                    <p>Using this function you can discover all the contents of the given directory. Note that this is subject to <a class="scrollto" href="#security-sandboxing">sandboxing rules</a>.
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">Some
+lua
+code
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="global-enterfullscreen" class="section-block">
+                                    <h6 class="block-title"><code>EnterFullscreen</code></h6>
+                                    <p>Description here! EnterFullscreen
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">Some
+lua
+code
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="global-exitfullscreen" class="section-block">
+                                    <h6 class="block-title"><code>ExitFullscreen</code></h6>
+                                    <p>Description here! ExitFullscreen
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">Some
+lua
+code
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="global-scriptpath" class="section-block">
+                                    <h6 class="block-title"><code>ScriptPath</code></h6>
+                                    <p>Description here! ScriptPath
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">Some
+lua
+code
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+                                <div id="global-strisnetaddr" class="section-block">
+                                    <h6 class="block-title"><code>StrIsNetAddr</code></h6>
+                                    <p>Description here! StrIsNetAddr
+                                    </p>
+                                    <div class="code-block">
+                                        <h6>Usage:</h6>
+                                        <pre><code class="language-lua">Some
+lua
+code
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+
+                                <!-- BEGIN Game.Client -->
+                                <div id="game-client" class="section-block">
+								<h3 class="block-title">Game.Client</h3>
+                                    <div id="game-client-tick" class="code-block">
+                                        <h6><code>Game.Client.Tick</code> <var>read-only</var></h6>
+										<p>Game.Client.Tick is a variable that always contains the current tick. You can convert it to seconds by dividing by <a class="scrollto" href="#game-client-tickspeed">Game.Client.TickSpeed</a>.</p>
+                                        <pre><code class="language-lua">Tick = Game.Client.Tick
+-- To get the seconds from it:
+Secs = Tick/Game.Client.TickSpeed
+</code></pre>
+                                    </div><!--//code-block-->
+									<div id="game-client-tickspeed" class="code-block">
+                                        <h6><code>Game.Client.TickSpeed</code> <var>read-only</var></h6>
+										<p>Game.Client.TickSpeed gives the number of ticks per second.</p>
+                                        <pre><code class="language-lua">TickSpeed = Game.Client.TickSpeed</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-intragametick" class="code-block">
+                                        <h6><code>Game.Client.IntraGameTick</code> <var>read-only</var></h6>
+										<p>Game.Client.IntraGameTick is used for prediction.</p>
+                                        <pre><code class="language-lua">IntraGameTick = Game.Client.IntraGameTick</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-predintragametick" class="code-block">
+                                        <h6><code>Game.Client.PredIntraGameTick</code> <var>read-only</var></h6>
+										<p>Game.Client.PredIntraGameTick is used for prediction.</p>
+                                        <pre><code class="language-lua">PredIntraGameTick = Game.Client.PredIntraGameTick</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-predgametick" class="code-block">
+                                        <h6><code>Game.Client.PredGameTick</code> <var>read-only</var></h6>
+										<p>Game.Client.PredGameTick is used for prediction.</p>
+                                        <pre><code class="language-lua">PredGameTick = Game.Client.PredGameTick</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-localtime" class="code-block">
+                                        <h6><code>Game.Client.LocalTime</code> <var>read-only</var></h6>
+										<p>Game.Client.LocalTime is the time in seconds how long AllTheHaxx is running.</p>
+                                        <pre><code class="language-lua">LocalTime = Game.Client.LocalTime</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-conntime" class="code-block">
+                                        <h6><code>Game.Client.ConnTime</code> <var>read-only</var></h6>
+										<p>Game.Client.ConnTime is the time in seconds how long you are connected to the current server. It starts at 0 on startup and gets reset everytime you join a server.</p>
+                                        <pre><code class="language-lua">ConnTime = Game.Client.ConnTime</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-connect" class="code-block">
+                                        <h6><code>Game.Client:Connect(string IP)</code></h6>
+										<p>Game.Client:Connect(string IP) connects you to the given ip (as string)</p>
+                                        <pre><code class="language-lua">Game.Client:Connect("127.0.0.1")
+-- Would be localhost! If you host your own server locally, it should work</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-disconnect" class="code-block">
+                                        <h6><code>Game.Client:Disconnect()</code></h6>
+										<p>Game.Client:Disconnect() disconnects you from the current server. If you are not connected to any server, this does nothing.</p>
+                                        <pre><code class="language-lua">Game.Client:Disconnect()</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-dummyconnect" class="code-block">
+                                        <h6><code>Game.Client:DummyConnect()</code></h6>
+										<p>Game.Client:DummyConnect() connects your dummy to your current server. If you are not connected to any server, this does nothing.</p>
+                                        <pre><code class="language-lua">Game.Client:DummyConnect()
+-- Tip: useful in combination with "Game.Client:DummyConnected()" and "Game.Client:DummyConnecting()"</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-dummydisconnect" class="code-block">
+                                        <h6><code>Game.Client:DummyDisconnect(string Reason)</code></h6>
+										<p>Game.Client:DummyDisconnect(string Reason) disconnects your dummy from the server with the given Reason. If the dummy is not connected, this does nothing.</p>
+                                        <pre><code class="language-lua">Game.Client:DummyDisconnect()
+-- Tip: useful in combination with "Game.Client:DummyConnected()" and "Game.Client:DummyDisconnect()"</code></pre>
+                                    </div><!--//code-block-->
+
+									<div id="game-client-sendinfo" class="code-block">
+                                        <h6><code>Game.Client:SendInfo(bool Start)</code></h6>
+										<p>Game.Client:SendInfo(bool Start) sends your info to the server. Usually the passed argument must be false or it won't work.</p>
+                                        <pre><code class="language-lua">Game.Client:SendInfo(false)
+-- Some very old server might also accept:
+Game.Client:SendInfo(true)</code></pre>
+                                    </div><!--//code-block-->
+									<div id="game-client-rconauth" class="code-block">
+                                        <h6><code>Game.Client:RconAuth(string Username, string Password)</code></h6>
+										<p>Game.Client:RconAuth(string Username, string Password) tries to auth you in the rcon (F2) with the given Username and Password. Most servers other than recent DDNet will ignore the username.</p>
+                                        <pre><code class="language-lua">Game.Client:RconAuth("","MySeCrEtPaSSworD")
+-- If you're a moderator on DDNet, you might want to use something like:
+Game.Client:RconAuth("Admin","MySeCrEtPaSSworD")
+-- The correct parameters for this are defined in your server's configuration.</code></pre>
+                                    </div><!--//code-block-->
+									<div id="game-client-rconauthed" class="code-block">
+                                        <h6><code>Game.Client:RconAuthed()</code> <var>-&gt; bool</var></h6>
+										<p>Game.Client:RconAuthed() return a bool that indicates whether you are authed (logged in to rcon).</p>
+                                        <pre><code class="language-lua">Authed = Game.Client:RconAuthed()
+-- true or false</code></pre>
+                                    </div><!--//code-block-->
+									<div id="game-client-rconsend" class="code-block">
+                                        <h6><code>Game.Client:RconSend(string Command)</code></h6>
+										<p>Game.Client:RconSend(string Command) sends a command to the rcon. Obvisouly this will only work when you are authed.</p>
+                                        <pre><code class="language-lua">Game.Client:RconSend("kick dennis adminabuse")
+-- If it doesn't work, make sure to be authed! This code will check that:
+if Game.Client:RconAuthed() then -- Only send a command if we are authed
+	Game.Client:RconSend("echo Wohoo, I have rcon access!")
+else
+    error("tried to send an rcon command while not being authed") -- otherwise, give us an error
+end</code></pre>
+                                    </div><!--//code-block-->
+									<div id="game-client-fps" class="code-block">
+                                        <h6><code>Game.Client.FPS</code> <var>read-only</var></h6>
+										<p>Game.Client.FPS is the current number of frames per second.</p>
+                                        <pre><code class="language-lua">MyFPS = Game.Client.FPS
+-- This value is accurate and will fluctuate rapidly (every frame!). The fps you see displayed at the bottom right in your client is just an average.
+</code></pre>
+                                    </div><!--//code-block-->
+									<div id="game-client-state" class="code-block">
+                                        <h6><code>Game.Client.State</code> <var>read-only</var></h6>
+										<p>Game.Client.State is the current state of the client. Here is a list of all possible states (they are defined in the twdata lib)</p>
+                                        <pre><code class="language-lua">Import("twdata")
+MyState = Game.Client.State
+if MyState == STATE_OFFLINE then
+    -- we are offline, i.e. not connected to a server
+elseif MyState == STATE_CONNECTING then
+    -- we are currently connecting to a server
+elseif MyState == STATE_LOADING then
+    -- the client is loading the map (the duration of this state is usually rather short)
+elseif MyState == STATE_ONLINE then
+    -- we are online, i.e. on a server
+elseif MyState == STATE_DEMOPLAYBACK then
+    -- we are playing/watching a demo
+elseif MyState == STATE_QUITING then
+    -- the user has requested the client to quit and it is about to close itself
+end</code></pre>
+                                    </div><!--//code-block-->
+									<div id="game-client-demostart" class="code-block">
+                                        <h6><code>Game.Client:DemoStart(string Filename, bool WithTimestamp, int Recorder)</code></h6>
+										<p>This function starts the demo recorder with the given id and record to a file with the given name. If WithTimestamp is true, the current date and time will be added to the filename automatically.<br>
+                                            Demo recorder IDs are defined in the <a class="scrollto" href="#libs-twdata">twdata</a> lib</p>
+                                        <pre><code class="language-lua">Import("twdata")
+Game.Client:DemoStart("YoungFlyme_Race_Pro_2k17", false, DEMORECORDER_MANUAL)
+-- There are 3 demo recorders in the client: manual, auto and race.
+Game.Client:DemoStart("YoungFlyme_Race_Pro_2k17_in_teh_race", false, DEMORECORDER_RACE) -- Changed recorder id will open another recorder which records too! If you change the name too you can save 2 records which recorded the same.
+</code></pre>
+                                    </div><!--//code-block-->
+									<div id="game-client-demostop" class="code-block">
+                                        <h6><code>Game.Client:DemoStop(int Recorder)</code></h6>
+										<p>Game.Client:DemoStop(int Recorder) stops the demo recorder with the given id. If the recorder is currently recording, it will save everything it has recorded.</p>
+                                        <pre><code class="language-lua">Import("twdata")
+Game.Client:DemoStop(DEMORECORDER_AUTO)
+Game.Client:DemoStop(DEMORECORDER_RACE)
+</code></pre>
+                                    </div><!--//code-block-->
+                                </div><!--//section-block-->
+								<div id="game-ui" class="section-block">
+								<h3 class="block-title">Game.Ui</h3>
+								<div class="callout-block callout-success">
+									<div class="icon-holder">
+										<i class="fa fa-thumbs-up"></i>
+									</div><!--//icon-holder-->
+									<div class="content">
+										<h4 class="callout-title">Useful Tip:</h4>
+										<p>Don't give up on this too quickly. The Teeworlds UI is a bit complicated, but once you know how it works, you will love it :P</br>Be sure to have read through the <a class="scrollto" href="#uirect">UIRect</a> and <a class="scrollto" href="#libs-containers">Containers</a> sections for better understanding.</p>
+									</div><!--//content-->
+								</div>
+								<div class="callout-block callout-danger">
+									<div class="icon-holder">
+										<i class="fa fa-exclamation-triangle"></i>
+									</div><!--//icon-holder-->
+									<div class="content">
+										<h4 class="callout-title">Important:</h4>
+										<p>All UI elements have to be drawn in an appropriate <a class="scrollto" href="#events-renderlevels">render event</a> or they might not appear on the screen!</p>
+									</div><!--//content-->
+								</div><!--//callout-block-->
+									<div id="game-ui-dolabel" class="code-block">
+										<h6><code>Game.Ui:DoLabel(<a class="scrollto" href="#uirect">UIRect</a> Rect, string Text, int Size, int Align, int MaxWidth, string Highlight)</code></h6>
+										<p>Game.Ui:DoLabel(<a class="scrollto" href="#uirect">UIRect</a> Rect, string Text, int Size, int Align, int MaxWidth, string Highlight) displays a label (text) in the given Rect with the given parameters</p>
+										<pre><code class="language-lua">Import("ui")
+Rect = Game.Ui:Screen() -- For demontrations we simply use the entire screen
+Text = "This is my awesome text"
+FontSize = 20 -- Font size in pixel
+Align = ALIGN_CENTER -- defined in the 'ui' lib
+MaxWidth = Rect.w-5 -- The text will be wrapped when its width surpasses MaxWidth
+Highlight = "awesome text" -- This will highlight the given substring in a other color
+Game.Ui:DoLabel(Rect, Text, FontSize, Align, MaxWidth, Highlight)
+</code></pre>
+									</div><!--//code-block-->
+                                    <div class="content">
+                                        <h4 class="callout-title">Warning:</h4>
+                                        <p>Using this function is discouraged as it doesn't scale the text to the user's resolution! Only use it if you know what you're doing, otherwise use <a class="scrollto" href="#game-ui-dolabelscaled">DoLabelScaled</a>.
+                                        </p>
+                                    </div><!--//content-->
+
+									<div id="game-ui-dolabelscaled" class="code-block">
+										<h6><code>Game.Ui:DoLabelScaled(<a class="scrollto" href="#uirect">UIRect</a> Rect, string Text, int Size, int Align, int MaxWidth, string Highlight)</code></h6>
+										<p>this function does the same as Game.Ui:DoLabel, but automatically adjusts the label (text) to the current screen scale (ui_scale setting in F1)</p>
+										<pre><code class="language-lua">Import("ui")
+Rect = Game.Ui:Screen() -- For demontrations we simply use the entire screen
+Text = "This is my awesome text"
+FontSize = 20 -- Font size in pixel
+Align = ALIGN_CENTER -- defined in the 'ui' lib
+MaxWidth = Rect.w-5 -- The text will be wrapped when its width surpasses MaxWidth
+Highlight = "awesome text" -- This will highlight the given substring in a other color
+Game.Ui:DoLabel(Rect, Text, FontSize, Align, MaxWidth, Highlight)
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-ui-scale" class="code-block">
+										<h6><code>Game.Ui:Scale()</code> <var>-&gt; float</var></h6>
+										<p>Game.Ui:Scale() returns the scale of the Ui (RealScale / 100)</p>
+										<pre><code class="language-lua">MyScale = Game.Ui:Scale()
+print(MyScale) -- > 1.00
+-- if the scale was set to 100 in the settings
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-ui-screen" class="code-block">
+										<h6><code>Game.Ui:Screen()</code> <var>-&gt; UIRect</var></h6>
+										<p>Game.Ui:Screen() returns a <a class="scrollto" href="#uirect">UIRect</a> that represents the dimensions of the entire screen. 'Screen' here means the Teeworlds window, but note that the resulting dimensions of this rect are virtually arbitrary and have nothing to do with the set resolution! (so just think of this rect as your screen, but don't actually look at the values)</p>
+										<pre><code class="language-lua">Screen = Game.Ui:Screen()
+print(Screen.x,Screen.y,Screen.w,Screen.h) -- > 0    0    1066.6666259766    600
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-ui-mouse" class="code-block">
+										<h6 style="display: inline-block; padding-right: 20px;"><code>Game.Ui:MouseX()</code></h6><h6 style="display: inline-block"><code>Game.Ui:MouseY()</code></h6>
+										<p>Game.Ui:MouseX() and Game.Ui:MouseY() return the position of the UI cursor.</p>
+										<pre><code class="language-lua">MousePos = vec2(Game.Ui:MouseX(), Game.Ui:MouseY())
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-ui-mouseworld" class="code-block">
+										<h6 style="display: inline-block; padding-right: 20px;"><code>Game.Ui:MouseWorldX()</code></h6><h6 style="display: inline-block"><code>Game.Ui:MouseWorldY()</code></h6>
+										<p>Game.Ui:MouseWorldX() and Game.Ui:MouseWorldY() seems to be the same as <a class="scrollto" href="#game-ui-mouse">Game.Ui:MouseX()</a> and <a class="scrollto" href="#game-ui-mouse">Game.Ui:MouseY()</a>.</p>
+									</div><!--//code-block-->
+									<div id="game-ui-mousebutton" class="code-block">
+										<h6><code>Game.Ui:MouseButton(int Button)</code> <var>-&gt; {0,1}</h6>
+										<p>Game.Ui:MouseButton(int Button) return 0 or 1 depending on whether the given button is currently pressed. All button are displayed in the code below</p>
+										<pre><code class="language-lua">function OnTick()
+    print( Game.Ui:MouseButton(0) ) -- 0 = Left button
+end
+-- If we would now be pressing the left mouse button it would return 1, otherwise 0
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-ui-mousebuttonclicked" class="code-block">
+										<h6><code>Game.Ui:MouseButtonClicked(int Button)</code> <var>-&gt; {0,1}</h6>
+										<p>Game.Ui:MouseButtonClicked(int Button) return 1 only the first time after the button was pressed down, after that it will return 0 until the button is released and clicked again.</p>
+										<pre><code class="language-lua">function OnTick()
+    print( Game.Ui:MouseButton(1) ) -- 1 = Right button
+end
+-- Exactly when we click it is 1, after this or if we not clicked it is 0!
+</code></pre>
+									</div><!--//code-block-->
+                                    <div class="callout-block callout-info">
+                                        <div class="icon-holder"><i class="fa fa-info-circle"></i></div><!--//icon-holder-->
+                                        <div class="content">
+                                            <h4 class="callout-title">Possible values</h4>
+                                            <p>Possible values for <code>Game.Ui:MouseButton</code> and <code>Game.Ui:MouseButtonClicked</code> are:<br>
+                                                0 → left mouse button<br>
+                                                1 → right mouse button<br>
+                                                2 → middle mouse button</p>
+                                        </div><!--//content-->
+                                    </div>
+
+									<div id="game-ui-mouseinside" class="code-block">
+										<h6><code>Game.Ui:MouseInside(<a class="scrollto" href="#uirect">UIRect</a> Rect)</code></h6>
+										<p>Game.Ui:MouseInside(<a class="scrollto" href="#uirect">UIRect</a> Rect) returns 1 when the ui cursor is inside the given Rect, otherwise 0.</p>
+										<pre><code class="language-lua">MouseInsideScreen = Game.Ui:MouseInside(Game.Ui:Screen()) -- would be 1 everytime but yeah why not ^^
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-ui-clipenable" class="code-block">
+										<h6><code>Game.Ui:ClipEnable(<a class="scrollto" href="#uirect">UIRect</a> Rect)</code></h6>
+										<p>Game.Ui:ClipEnable(<a class="scrollto" href="#uirect">UIRect</a> Rect) limits the region in which rendering is possible to the given rect until <a class="scrollto" href="#game-ui-clipdisable">Game.Ui:ClipDisable()</a> gets called.</p>
+										<pre><code class="language-lua">Screen = Game.Ui:Screen()
+AllowedRegion = UIRect(Screen.w/2-50, Screen.h/2-50, 100, 100)
+Game.Ui:ClipEnable(AllowedRegion) -- Clip everything but the middle of the screen
+Game.RenderTools:DrawUIRect(Screen, vec4(1,0,1,1), 0, 0) -- draws a pink rect all over the screen, but watch what happens!
+Game.Ui:ClipDisable() -- Disable clipping! If you don't do this, the whole game will look pretty fucked up.
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-ui-clipdisable" class="code-block">
+										<h6><code>Game.Ui:ClipDisable()</code></h6>
+										<p>Game.Ui:ClipDisable() disables the latest instruction command and roll back to the clipping instruction that has been issued before this, if there is any. That means, for every ClipEnable you have to have a ClipDisable!</p>
+									</div><!--//code-block-->
+									<div class="callout-block callout-warning">
+										<div class="icon-holder">
+											<i class="fa fa-exclamation"></i>
+										</div><!--//icon-holder-->
+										<div class="content">
+											<h4 class="callout-title">Remember!</h4>
+											<p>Don't forget to call <code>Game.Ui:ClipDisable()</code> before your script returns from the render event, or it will break all further rendering while the script is running!</p>
+										</div><!--//content-->
+									</div><!--//callout-block-->
+								</div><!--//section-block-->
+								<div id="game-rendertools" class="section-block">
+								<h3 class="block-title">Game.RenderTools</h3>
+									<div id="game-rendertools-selectsprite" class="code-block">
+										<h6 style="display: inline-block; padding-right: 20px;"><code>Game.RenderTools:SelectSprite(int Id, int Flags, int x, int y)</code></h6><h6 style="display: inline-block"><code>Game.RenderTools:DrawSprite(int x, int y, int Size)</code></h6>
+										<p>Game.RenderTools:SelectSprite(int Id, int Flags, int x, int y) selects the given sprite from the loaded texture. To draw this you have to use Game.RenderTools:DrawSprite(int x, int y, int Size).</p>
+										<p>This doesn't work without a <a class="scrollto" href="#engine-graphics-quadsbegin">Engine.Graphics:QuadsBegin()</a> and <a class="scrollto" href="#engine-graphics-textureset">Engine.Graphics:TextureSet(int Texture)</a></p>
+										<pre><code class="language-lua">Import("sprites") -- Needed library for all sprites, have a look at it's code!
+
+Engine.Graphics:LoadTexture("data/textures/game/".. Config.tex_game ..".png",-1,-1,1) -- Load the game texture for this
+										
+Engine.Graphics:TextureSet(Tex)
+Engine.Graphics:QuadsBegin()
+	Game.RenderTools:SelectSprite(SPRITE_WEAPON_RIFLE_PROJ,0,0,0) -- Select a sprite 
+	Game.RenderTools:DrawSprite(10,10,32) -- just for tests!
+Engine.Graphics:QuadsEnd()
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-rendertools-drawroundrect" class="code-block">
+										<h6><code>Game.RenderTools:DrawRoundRect(float x, float y, float Width, float Height, float Radius)</code></h6>
+										<p>Game.RenderTools:DrawRoundRect(float x, float y, float Width, float Height, float Radius) draws a round rectangle with the given parameters.</p>
+										<p>This doesn't work without a <a class="scrollto" href="#engine-graphics-quadsbegin">Engine.Graphics:QuadsBegin()</a> and <a class="scrollto" href="#engine-graphics-textureset">Engine.Graphics:TextureSet(int Texture)</a></p>
+										<pre><code class="language-lua">x = 10
+y = 10
+Width = 100
+Height = 300
+Radius = 20
+Engine.Graphics:TextureSet(-1)
+Engine.Graphics:QuadsBegin()
+	Game.RenderTools:DrawRoundRect(x, y, Width, Height, Radius)
+Engine.Graphics:QuadsEnd()
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-rendertools-drawroundrectext" class="code-block">
+										<h6><code>Game.RenderTools:DrawRoundRectExt(float x, float y, float Width, float Height, float Radius, int Corners)</code></h6>
+										<p>Game.RenderTools:DrawRoundRectExt(float x, float y, float Width, float Height, float Radius, int Corners) do exactly the same like <a class="scrollto" href="#game-rendertools-drawroundrect">DrawRoundRect()</a> but here you can set the Corners too!</p>
+										<p>This doesn't work without a <a class="scrollto" href="#engine-graphics-quadsbegin">Engine.Graphics:QuadsBegin()</a> and <a class="scrollto" href="#engine-graphics-textureset">Engine.Graphics:TextureSet(int Texture)</a></p>
+										<pre><code class="language-lua">Import("ui") -- contains all the _CUI.* variables
+
+x = 10
+y = 10
+Width = 100
+Height = 300
+Radius = 20
+Engine.Graphics:TextureSet(-1)
+Engine.Graphics:QuadsBegin()
+	Game.RenderTools:DrawRoundRectExt(x, y, Width, Height, Radius,_CUI.CORNER_ALL)
+	--[[
+		Possible corners:
+		_CUI.CORNER_ALL -- All corners
+		
+		_CUI.CORNER_T -- Both Top corners
+		_CUI.CORNER_B -- Both Bottom corners
+		_CUI.CORNER_L -- Both Left corners
+		_CUI.CORNER_R -- Both Right corners
+		
+		_CUI.CORNER_TR -- Top-Right corner
+		_CUI.CORNER_BR -- Bottom-Right corner
+		_CUI.CORNER_TL -- Top-Left corner
+		_CUI.CORNER_BL -- Bottom-Left corner
+		
+		_CUI.CORNER_NONE -- No corners
+	]]
+Engine.Graphics:QuadsEnd()
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-rendertools-drawuirect" class="code-block">
+										<h6><code>Game.RenderTools:DrawUIRect(<a class="scrollto" href="#uirect">UIRect</a> Rect, <a class="scrollto" href="#vec4">vec4</a> Color, int Corners, float Rounding)</code></h6>
+										<p>Game.RenderTools:DrawUIRect(<a class="scrollto" href="#uirect">UIRect</a> Rect, <a class="scrollto" href="#vec4">vec4</a> Color, int Corners, float Rounding) draws the given Rect when the given color and corners. Userfull for debug drawing!</p>
+										<p>This doesn't work without a <a class="scrollto" href="#engine-graphics-quadsbegin">Engine.Graphics:QuadsBegin()</a> and <a class="scrollto" href="#engine-graphics-textureset">Engine.Graphics:TextureSet(int Texture)</a></p>
+										<pre><code class="language-lua">Import("ui") -- Needed for all _CUI.* variables
+Rect = UIRect(10,10,250,300)
+Color = vec4(1,0,0,1) -- vec4(red,green,blue,all) (0-1 not 0-255!)
+Rounding = 7 -- 7 pixel
+Engine.Graphics:TextureSet(-1)
+Engine.Graphics:QuadsBegin()
+	Game.RenderTools:DrawUIRect(Rect, Color, _CUI.CORNER_ALL, Rounding)
+	--[[
+		Possible corners:
+		_CUI.CORNER_ALL -- All corners
+		
+		_CUI.CORNER_T -- Both Top corners
+		_CUI.CORNER_B -- Both Bottom corners
+		_CUI.CORNER_L -- Both Left corners
+		_CUI.CORNER_R -- Both Right corners
+		
+		_CUI.CORNER_TR -- Top-Right corner
+		_CUI.CORNER_BR -- Bottom-Right corner
+		_CUI.CORNER_TL -- Top-Left corner
+		_CUI.CORNER_BL -- Bottom-Left corner
+		
+		_CUI.CORNER_NONE -- No corner
+	]]
+Engine.Graphics:QuadsEnd()
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-rendertools-drawcircle" class="code-block">
+										<h6><code>Game.RenderTools:DrawCircle(float x, float y, float Radius, int Segments)</code></h6>
+										<p>Game.RenderTools:DrawCircle(float x, float y, float Radius, int Segments) draws a circle with the given parameter</p>
+										<p>This doesn't work without a <a class="scrollto" href="#engine-graphics-quadsbegin">Engine.Graphics:QuadsBegin()</a> and <a class="scrollto" href="#engine-graphics-textureset">Engine.Graphics:TextureSet(int Texture)</a></p>
+										<pre><code class="language-lua">
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-rendertools-rendertee" class="code-block">
+										<h6><code>Game.RenderTools:RenderTee(int Emote,<a class="scrollto" href="#teerenderinfo">TeeRenderInfo</a> TeeInfo, <a class="scrollto" href="#vec2">vec2</a> Dir, <a class="scrollto" href="#vec2">vec2</a> Pos, bool UseTeeAlpha, float AlphaLimit)</code></h6>
+										<p>Game.RenderTools:RenderTee(int Emote,<a class="scrollto" href="#teerenderinfo">TeeRenderInfo</a> TeeInfo, <a class="scrollto" href="#vec2">vec2</a> Dir, <a class="scrollto" href="#vec2">vec2</a> Pos, bool UseTeeAlpha, float AlphaLimit) renders a tee with the given parameters!</p>
+										<pre><code class="language-lua">MyTee = TeeRenderInfo()
+MyTee.Texture = Game.Players(Game.LocalCID).RenderInfo.Texture
+MyTee.ColorBody = Game.Players(Game.LocalCID).RenderInfo.ColorBody
+MyTee.ColorFeet = Game.Players(Game.LocalCID).RenderInfo.ColorFeet
+MyTee.Size = Game.Players(Game.LocalCID).RenderInfo.Size
+MyTee.GotAirJump = Game.Players(Game.LocalCID).RenderInfo.GotAirJump
+Game.RenderTools:RenderTee( Game.CharSnap(Game.LocalCID).Cur.Emote, MyTee, vec2(0,0), vec2(50,50), false, 0)
+</code></pre>
+									</div><!--//code-block-->
+								</div><!--//section-block-->
+								<div id="game-chat" class="section-block">
+									<h3 class="block-title">Game.Chat</h3>
+									<div id="game-chat-say" class="code-block">
+										<h6><code>Game.Chat:Say(int Team, string Text, bool NoTranslator)</code></h6>
+										<p>Game.Chat:Say(int Team, string Text, bool NoTranslator) writes the given text in the chat.</p>
+										<pre><code class="language-lua">Team = 0 -- 0 = Allchat  1 = Teamchat
+Text = "I didn't write this!"
+NoTranslator = true -- don't let the translator try to translate it :3
+Game.Chat:Say(Team, Text, NoTranslator)
+-- If Team is not 1 or 0 nothing will happen!
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-chat-print" class="code-block">
+										<h6><code>Game.Chat:Print(int ClientID, int Team, string Text, bool Hidden)</code></h6>
+										<p>Game.Chat:Print(int ClientID, int Team, string Text, bool Hidden) prints a line into the chat (only you can see it) with the given parameters</p>
+										<pre><code class="language-lua">ClinetId = -2 -- [*Lua*] output (red)
+--[[
+	Custom ID's:
+		-2 (or smaller) == [*Lua*]: [Text]
+		-1 == *** [Text]
+]]
+Team = 0 -- 0 = Allchat  1 = Teamchat
+Text = "Script Started"
+Hidden = false -- true == changed color when a PlayerId wrotes smth (0 or above)| false == no color changes
+
+Game.Chat:Print(ClientID, Team, Text, Hidden)
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-chat-addline" class="code-block">
+										<h6><code>Game.Chat:AddLine(int ClientID, int Team, string Text, bool Hidden)</code></h6>
+										<p>Game.Chat:AddLine(int ClientID, int Team, string Text, bool Hidden) does exactly the same like <a class="scrollto" href="#game-chat-print">Game.Chat:Print()</a></p>
+									</div><!--//code-block-->
+									<div id="game-chat-mode" class="code-block">
+										<h6><code>Game.Chat.Mode</code></h6>
+										<p>Game.Chat.Mode returns the current chat mode. All modes are listed in the code below</p>
+										<pre><code class="language-lua">MyMode = Game.Chat.Mode 
+--[[
+	Modes:
+		MODE_NONE = 0
+		MODE_ALL = 1
+		MODE_TEAM = 2
+		MODE_HIDDEN = 3
+		MODE_CRYPT = 4
+]]
+</code></pre>
+									</div><!--//code-block-->
+								</div><!--//section-block-->
+								<div id="game-console" class="section-block">
+									<h3 class="block-title">Game.Console</h3>
+									<div id="game-console-print" class="code-block">
+										<h6><code>Game.Console:Print(int Level, string From, string Text, bool Highlighted)</code></h6>
+										<p>Game.Console:Print(int Level, string From, string Text, bool Highlighted) prints a line into the console.</p>
+										<pre><code class="language-lua">Level = 0 -- text will only show up if this is less than console_output_level in f1
+From = "MyScript"
+Text = "This is a debug console output!"
+Highlighted = false -- true = red console output | false = normal color output
+Game.Console:Print(Level, From, Text, Highlighted)
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-console-lineisvalid" class="code-block">
+										<h6><code>Game.Console:LineIsValid(string Text)</code> <var>-&gt; bool</var></h6>
+										<p>Game.Console:LineIsValid(string Text) returns a bool indication whether the given string is a valid console command (f1)</p>
+										<pre><code class="language-lua">print(tostring(Game.Console:LineIsValid("Hello"))) -- > false
+print(tostring(Game.Console:LineIsValid("cl_antiping"))) -- > true
+</code></pre>
+									</div><!--//code-block-->
+								</div><!--//section-block-->
+								<div id="game-irc" class="section-block">
+									<h3 class="block-title">Game.IRC</h3>
+									<div id="game-irc-sendmsg" class="code-block">
+										<h6><code>Game.IRC:SendMsg(string To, string Message)</code></h6>
+										<p>Game.IRC:SendMsg(string To, string Message) send the given Text to the given User or Channel</p>
+										<pre><code class="language-lua">Server = "#AllTheHaxx"
+User = "YoungFlyme"
+Text = "Hello ATH community ^^"
+TextToUser = "Hello YoungFlyme thx for the Docs."
+
+Game.IRC:SendMsg(Server, Text) -- Send this into the channel (name must start with a #)
+Game.IRC:SendMsg(User, TextToUser) -- Send this to the user (without the #)
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-irc-jointo" class="code-block">
+										<h6><code>Game.IRC:JoinTo(string Server, string Password)</code></h6>
+										<p>Game.IRC:JoinTo(string Server, string Password) joines to the given server with the given passowrd</p>
+										<pre><code class="language-lua">Game.IRC:JoinTo("#MyChannel","ChannelPW") -- channel names always begin with '#'
+</code></pre>
+									</div><!--//code-block-->
+									<div id="game-irc-getnick" class="code-block">
+										<h6><code>Game.IRC:GetNick()</code></h6>
+										<p>Game.IRC:GetNick() returns your IRC nickname </p>
+										<pre><code class="language-lua">print(Game.IRC:GetNick()) -- > YoungFlyme
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+								</div><!--//section-block-->
+                                <div id="game-sound" class="section-block">
+                                    <h3 class="block-title">Game.Sound</h6>
+                                    <div id="game-sound-playsound" class="code-block">
+                                        <h6><code>Game.Sound:PlaySound()</code></h6>
+                                        <p>Game.Sound:PlaySound() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-sound-stopsound" class="code-block">
+                                        <h6><code>Game.Sound:StopSound()</code></h6>
+                                        <p>Game.Sound:StopSound() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-sound-stopallsounds" class="code-block">
+                                        <h6><code>Game.Sound:StopAllSounds()</code></h6>
+                                        <p>Game.Sound:StopAllSounds() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-sound-setchannel" class="code-block">
+                                        <h6><code>Game.Sound:SetChannel(int ChannelID, float Volume, float Panning)</code></h6>
+                                        <p>Game.Sound:SetChannel(int ChannelID, float Volume, float Panning) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-sound-loadsoundopus" class="code-block">
+                                        <h6><code>Game.Sound:LoadSoundOpus()</code></h6>
+                                        <p>Game.Sound:LoadSoundOpus() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-sound-loadsoundwave" class="code-block">
+                                        <h6><code>Game.Sound:LoadSoundWave()</code></h6>
+                                        <p>Game.Sound:LoadSoundWave() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-sound-loadsoundopusmemory" class="code-block">
+                                        <h6><code>Game.Sound:LoadSoundOpusMemory()</code></h6>
+                                        <p>Game.Sound:LoadSoundOpusMemory() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-sound-loadsoundwavememory" class="code-block">
+                                        <h6><code>Game.Sound:LoadSoundWaveMemory()</code></h6>
+                                        <p>Game.Sound:LoadSoundWaveMemory() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-sound-unloadsound" class="code-block">
+                                        <h6><code>Game.Sound:UnloadSound()</code></h6>
+                                        <p>Game.Sound:UnloadSound() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-sound-maxduration" class="code-block">
+                                        <h6><code>Game.Sound:MaxDuration()</code></h6>
+                                        <p>Game.Sound:MaxDuration() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                </div><!--//section-block-->
+                                <div id="game-emote" class="section-block">
+                                    <h3 class="block-title">Game.Emote</h6>
+                                    <div id="game-emote-send" class="code-block">
+                                        <h6><code>Game.Emote:Send(const char *pCmd)</code></h6>
+                                        <p>Game.Emote:Send(const char *pCmd) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-emote-sendeye" class="code-block">
+                                        <h6><code>Game.Emote:SendEye()</code></h6>
+                                        <p>Game.Emote:SendEye() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-emote-active" class="code-block">
+                                        <h6><code>Game.Emote.Active</code></h6>
+                                        <p>Game.Emote.Active -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                </div><!--//section-block-->
+                                <div id="game-collision" class="section-block">
+                                    <h3 class="block-title">Game.Collision</h6>
+                                    <div id="game-collision-getmapwidth" class="code-block">
+                                        <h6><code>Game.Collision.GetMapWidth</code></h6>
+                                        <p>Game.Collision.GetMapWidth -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-getmapheight" class="code-block">
+                                        <h6><code>Game.Collision.GetMapHeight</code></h6>
+                                        <p>Game.Collision.GetMapHeight -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-distance" class="code-block">
+                                        <h6><code>Game.Collision:Distance(vec2 s, vec2 e)</code></h6>
+                                        <p>Game.Collision:Distance(vec2 s, vec2 e) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-normalize" class="code-block">
+                                        <h6><code>Game.Collision:Normalize(vec2 v)</code></h6>
+                                        <p>Game.Collision:Normalize(vec2 v) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-closestpointonline" class="code-block">
+                                        <h6><code>Game.Collision:ClosestPointOnLine(vec2 s, vec2 e, vec2 v)</code></h6>
+                                        <p>Game.Collision:ClosestPointOnLine(vec2 s, vec2 e, vec2 v) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-gettile" class="code-block">
+                                        <h6><code>Game.Collision:GetTile(float x, float y)</code></h6>
+                                        <p>Game.Collision:GetTile(float x, float y) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-checkpoint" class="code-block">
+                                        <h6><code>Game.Collision:CheckPoint(float x, float y)</code></h6>
+                                        <p>Game.Collision:CheckPoint(float x, float y) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-intersectline" class="code-block">
+                                        <h6><code>Game.Collision:IntersectLine(vec2 Pos0, vec2 Pos1, vec2 *pOutCollision, vec2 *pOutBeforeCollision)</code></h6>
+                                        <p>Game.Collision:IntersectLine(vec2 Pos0, vec2 Pos1, vec2 *pOutCollision, vec2 *pOutBeforeCollision) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-intersectlinetelehook" class="code-block">
+                                        <h6><code>Game.Collision:IntersectLineTeleHook(vec2 Pos0, vec2 Pos1, vec2 *pOutCollision, vec2 *pOutBeforeCollision, int *pTeleNr)</code></h6>
+                                        <p>Game.Collision:IntersectLineTeleHook(vec2 Pos0, vec2 Pos1, vec2 *pOutCollision, vec2 *pOutBeforeCollision, int *pTeleNr) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-movepoint" class="code-block">
+                                        <h6><code>Game.Collision:MovePoint(vec2 *pInoutPos, vec2 *pInoutVel, float Elasticity, int *pBounces)</code></h6>
+                                        <p>Game.Collision:MovePoint(vec2 *pInoutPos, vec2 *pInoutVel, float Elasticity, int *pBounces) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-movebox" class="code-block">
+                                        <h6><code>Game.Collision:MoveBox(vec2 *pInoutPos, vec2 *pInoutVel, vec2 Size, float Elasticity)</code></h6>
+                                        <p>Game.Collision:MoveBox(vec2 *pInoutPos, vec2 *pInoutVel, vec2 Size, float Elasticity) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-collision-testbox" class="code-block">
+                                        <h6><code>Game.Collision:TestBox(vec2 Pos, vec2 Size)</code></h6>
+                                        <p>Game.Collision:TestBox(vec2 Pos, vec2 Size) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                </div><!--//section-block-->
+                                <div id="game-hud" class="section-block">
+                                    <h3 class="block-title">Game.HUD</h6>
+                                    <div id="game-hud-pushnotification" class="code-block">
+                                        <h6><code>Game.HUD:PushNotification(const char *pMsg, vec4 Color = vec4(1,1,1,1))</code></h6>
+                                        <p>Game.HUD:PushNotification(const char *pMsg, vec4 Color = vec4(1,1,1,1)) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                </div><!--//section-block-->
+                                <div id="game-menus" class="section-block">
+                                    <h3 class="block-title">Game.Menus</h6>
+                                    <div id="game-menus-active" class="code-block">
+                                        <h6><code>Game.Menus.Active</code></h6>
+                                        <p>Game.Menus.Active -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-activepage" class="code-block">
+                                        <h6><code>Game.Menus.ActivePage</code></h6>
+                                        <p>Game.Menus.ActivePage -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-mousepos" class="code-block">
+                                        <h6><code>Game.Menus.MousePos</code></h6>
+                                        <p>Game.Menus.MousePos -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-buttoncolormul" class="code-block">
+                                        <h6><code>Game.Menus:ButtonColorMul(CButtonContainer *pBC)</code></h6>
+                                        <p>Game.Menus:ButtonColorMul(CButtonContainer *pBC) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-dobutton_menu" class="code-block">
+                                        <h6><code>Game.Menus:DoButton_Menu(CButtonContainer *pBC, const char *pText, int Checked, const CUIRect *pRect, const char *pTooltip = 0, int Corner = CUI::CORNER_ALL, vec4 Color = vec4(1,1,1,0.5f))</code></h6>
+                                        <p>Game.Menus:DoButton_Menu(CButtonContainer *pBC, const char *pText, int Checked, const CUIRect *pRect, const char *pTooltip = 0, int Corner = CUI::CORNER_ALL, vec4 Color = vec4(1,1,1,0.5f)) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-dobutton_menutab" class="code-block">
+                                        <h6><code>Game.Menus:DoButton_MenuTab(CButtonContainer *pBC, const char *pText, int Checked, const CUIRect *pRect, int Corners, vec4 ColorActive = ms_ColorTabbarActive, vec4 ColorInactive = ms_ColorTabbarInactive, const char *pTooltip = 0)</code></h6>
+                                        <p>Game.Menus:DoButton_MenuTab(CButtonContainer *pBC, const char *pText, int Checked, const CUIRect *pRect, int Corners, vec4 ColorActive = ms_ColorTabbarActive, vec4 ColorInactive = ms_ColorTabbarInactive, const char *pTooltip = 0) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-dobutton_checkbox" class="code-block">
+                                        <h6><code>Game.Menus:DoButton_CheckBox(CButtonContainer *pBC, const char *pText, const char *pBoxText, const CUIRect *pRect, const char *pTooltip = 0, bool Checked = false, int Corner = CUI::CORNER_ALL)</code></h6>
+                                        <p>Game.Menus:DoButton_CheckBox(CButtonContainer *pBC, const char *pText, const char *pBoxText, const CUIRect *pRect, const char *pTooltip = 0, bool Checked = false, int Corner = CUI::CORNER_ALL) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-dobutton_toggle" class="code-block">
+                                        <h6><code>Game.Menus:DoButton_Toggle(CButtonContainer *pBC, int Checked, const CUIRect *pRect, bool Active, const char *pTooltip = 0)</code></h6>
+                                        <p>Game.Menus:DoButton_Toggle(CButtonContainer *pBC, int Checked, const CUIRect *pRect, bool Active, const char *pTooltip = 0) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-dobutton_checkbox_number" class="code-block">
+                                        <h6><code>Game.Menus:DoButton_CheckBox_Number(CButtonContainer *pBC, const char *pText, int Checked, const CUIRect *pRect, const char *pTooltip = 0, int Corner = CUI::CORNER_ALL)</code></h6>
+                                        <p>Game.Menus:DoButton_CheckBox_Number(CButtonContainer *pBC, const char *pText, int Checked, const CUIRect *pRect, const char *pTooltip = 0, int Corner = CUI::CORNER_ALL) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-dobutton_sprite" class="code-block">
+                                        <h6><code>Game.Menus:DoButton_Sprite(CButtonContainer *pBC, int ImageID, int SpriteID, int Checked, const CUIRect *pRect, int Corners, const char *pTooltip = 0)</code></h6>
+                                        <p>Game.Menus:DoButton_Sprite(CButtonContainer *pBC, int ImageID, int SpriteID, int Checked, const CUIRect *pRect, int Corners, const char *pTooltip = 0) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-doscrollbarv" class="code-block">
+                                        <h6><code>Game.Menus:DoScrollbarV(CButtonContainer *pBC, const CUIRect *pRect, float Current, const char *pTooltip = 0, int Value = ~0, int LenPercent = ~0)</code></h6>
+                                        <p>Game.Menus:DoScrollbarV(CButtonContainer *pBC, const CUIRect *pRect, float Current, const char *pTooltip = 0, int Value = ~0, int LenPercent = ~0) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-doscrollbarh" class="code-block">
+                                        <h6><code>Game.Menus:DoScrollbarH(CButtonContainer *pBC, const CUIRect *pRect, float Current, const char *pTooltip = 0, int Value = ~0, int LenPercent = ~0)</code></h6>
+                                        <p>Game.Menus:DoScrollbarH(CButtonContainer *pBC, const CUIRect *pRect, float Current, const char *pTooltip = 0, int Value = ~0, int LenPercent = ~0) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-doeditbox" class="code-block">
+                                        <h6><code>Game.Menus:DoEditbox()</code></h6>
+                                        <p>Game.Menus:DoEditbox() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-menus-docolorpicker" class="code-block">
+                                        <h6><code>Game.Menus:DoColorPicker(const CButtonContainer *pBC1, const CButtonContainer *pBC2, const CUIRect *pView, vec3 *pColorHSV)</code></h6>
+                                        <p>Game.Menus:DoColorPicker(const CButtonContainer *pBC1, const CButtonContainer *pBC2, const CUIRect *pView, vec3 *pColorHSV) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                </div><!--//section-block-->
+                                <div id="game-voting" class="section-block">
+                                    <h3 class="block-title">Game.Voting</h6>
+                                    <div id="game-voting-callvotespectate" class="code-block">
+                                        <h6><code>Game.Voting:CallvoteSpectate(int ClientID, const char *pReason, bool ForceVote = false)</code></h6>
+                                        <p>Game.Voting:CallvoteSpectate(int ClientID, const char *pReason, bool ForceVote = false) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-callvotekick" class="code-block">
+                                        <h6><code>Game.Voting:CallvoteKick(int ClientID, const char *pReason, bool ForceVote = false)</code></h6>
+                                        <p>Game.Voting:CallvoteKick(int ClientID, const char *pReason, bool ForceVote = false) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-callvoteoption" class="code-block">
+                                        <h6><code>Game.Voting:CallvoteOption(int OptionID, const char *pReason, bool ForceVote = false)</code></h6>
+                                        <p>Game.Voting:CallvoteOption(int OptionID, const char *pReason, bool ForceVote = false) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-vote" class="code-block">
+                                        <h6><code>Game.Voting:Vote(IConsole::IResult *pResult, void *pUserData)</code></h6>
+                                        <p>Game.Voting:Vote(IConsole::IResult *pResult, void *pUserData) -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-voteyes" class="code-block">
+                                        <h6><code>Game.Voting:VoteYes()</code></h6>
+                                        <p>Game.Voting:VoteYes() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-voteno" class="code-block">
+                                        <h6><code>Game.Voting:VoteNo()</code></h6>
+                                        <p>Game.Voting:VoteNo() -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-votedescription" class="code-block">
+                                        <h6><code>Game.Voting.VoteDescription</code></h6>
+                                        <p>Game.Voting.VoteDescription -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-votereason" class="code-block">
+                                        <h6><code>Game.Voting.VoteReason</code></h6>
+                                        <p>Game.Voting.VoteReason -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-secondsleft" class="code-block">
+                                        <h6><code>Game.Voting.SecondsLeft</code></h6>
+                                        <p>Game.Voting.SecondsLeft -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-isvoting" class="code-block">
+                                        <h6><code>Game.Voting.IsVoting</code></h6>
+                                        <p>Game.Voting.IsVoting -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-takenchoice" class="code-block">
+                                        <h6><code>Game.Voting.TakenChoice</code></h6>
+                                        <p>Game.Voting.TakenChoice -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-yes" class="code-block">
+                                        <h6><code>Game.Voting.Yes</code></h6>
+                                        <p>Game.Voting.Yes -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-no" class="code-block">
+                                        <h6><code>Game.Voting.No</code></h6>
+                                        <p>Game.Voting.No -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-pass" class="code-block">
+                                        <h6><code>Game.Voting.Pass</code></h6>
+                                        <p>Game.Voting.Pass -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                    <div id="game-voting-total" class="code-block">
+                                        <h6><code>Game.Voting.Total</code></h6>
+                                        <p>Game.Voting.Total -------// TODO!</p>
+                                        <pre><code class="language-lua">
+</code></pre>
+                                    </div>
+                                </div><!--//section-block-->
+
+
+
+
+
+
+
+
+
+<!-- TODO: CONTINUE HERE -->
+
+
+
+								<div id="game-charsnap-cur" class="section-block">
+									<h3 class="block-title">Game.CharSnap(ID).Cur</h3>
+									<div id="game-charsnap-cur-example" class="code-block">
+										<h6><code>Game.CharSnap(ID).Cur.example</code></h6>
+										<p>Game.CharSnap(ID).Cur.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-charsnap-cur-example" class="code-block">
+										<h6><code>Game.CharSnap(ID).Cur.example</code></h6>
+										<p>Game.CharSnap(ID).Cur.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-charsnap-cur-example" class="code-block">
+										<h6><code>Game.CharSnap(ID).Cur.example</code></h6>
+										<p>Game.CharSnap(ID).Cur.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-charsnap-cur-example" class="code-block">
+										<h6><code>Game.CharSnap(ID).Cur.example</code></h6>
+										<p>Game.CharSnap(ID).Cur.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-charsnap-cur-example" class="code-block">
+										<h6><code>Game.CharSnap(ID).Cur.example</code></h6>
+										<p>Game.CharSnap(ID).Cur.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-charsnap-cur-example" class="code-block">
+										<h6><code>Game.CharSnap(ID).Cur.example</code></h6>
+										<p>Game.CharSnap(ID).Cur.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-charsnap-cur-example" class="code-block">
+										<h6><code>Game.CharSnap(ID).Cur.example</code></h6>
+										<p>Game.CharSnap(ID).Cur.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+								</div><!--//section-block-->
+								<div id="game-snap-playinfo" class="section-block">
+									<h3 class="block-title">Game.Snap:PlayerInfos(ID)</h3>
+									<div id="game-snap-playinfo-example" class="code-block">
+										<h6><code>Game.Snap:PlayerInfos(ID).example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-snap-playinfo-example" class="code-block">
+										<h6><code>Game.Snap:PlayerInfos(ID).example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-snap-playinfo-example" class="code-block">
+										<h6><code>Game.Snap:PlayerInfos(ID).example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-snap-playinfo-example" class="code-block">
+										<h6><code>Game.Snap:PlayerInfos(ID).example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-snap-playinfo-example" class="code-block">
+										<h6><code>Game.Snap:PlayerInfos(ID).example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+								</div><!--//section-block-->
+								<div id="game-players-tee" class="section-block">
+									<h3 class="block-title" style="display: inline-block">Game.Players(ID).Tee</h3> and <h3 class="block-title" style="display: inline-block">Game.LocalTee</h3>
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee.example</code> and <code>Game.LocalTee.example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID).example and Game.LocalTee.example example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+									<div id="game-players-tee-example" class="code-block">
+										<h6><code>Game.Snap:Players(ID).Tee:example()</code> and <code>Game.LocalTee:example()</code></h6>
+										<p>Game.Snap:PlayerInfos(ID):example() and Game.LocalTee:example() example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+								</div><!--//section-block-->
+								<div id="game-tuning" class="section-block">
+									<h3 class="block-title">Game.Tuning()</h3>
+									<div id="game-tuning" class="code-block">
+										<h6><code>Game.Tuning().example</code></h6>
+										<p>Game.Snap:PlayerInfos(ID):example() and Game.LocalTee:example() example</p>
+										<pre><code class="language-lua">
+
+-- By YoungFlyme. Dec 1st, 2017</code></pre>
+									</div><!--//code-block-->
+								</div><!--//section-block-->
+								<div id="game-input" class="section-block">
+									<h3 class="block-title">Game.Input</h3>
+								</div><!--//section-block-->
+								<div id="game-serverinfo" class="section-block">
+									<h3 class="block-title">Game.ServerInfo</h3>
+								</div><!--//section-block-->
+								<div id="game-snap" class="section-block">
+									<h3 class="block-title">Game.Snap</h3>
+								</div><!--//section-block-->
+								<div id="game-charsnap" class="section-block">
+									<h3 class="block-title">Game.CharSnap(ID)</h3>
+								</div><!--//section-block-->
+								<div id="game-specinfo" class="section-block">
+									<h3 class="block-title">Game.SpecInfo</h3>
+								</div><!--//section-block-->
+								<div id="game-players" class="section-block">
+									<h3 class="block-title">Game.Players(ID)</h3>
+								</div><!--//section-block-->
+								<div id="engine-input" class="section-block">
+									<h3 class="block-title">Engine.Input</h3>
+								</div><!--//section-block-->
+								<div id="engine-curl" class="section-block">
+									<h3 class="block-title">Engine.Curl</h3>
+								</div><!--//section-block-->
+								<div id="engine-graphics" class="section-block">
+									<h3 class="block-title">Engine.Graphics</h3>
+								</div><!--//section-block-->
+								<div id="engine-textrender" class="section-block">
+									<h3 class="block-title">Engine.TextRender</h3>
+								</div><!--//section-block-->
+								<div id="engine-storage" class="section-block">
+									<h3 class="block-title">Engine.Storage</h3>
+								</div><!--//section-block-->
+							</section><!--//doc-section-->
+							<section id="callouts-section" class="doc-section">
+								<h2 class="section-title">Callouts</h2>
+								<div class="section-block">
+									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. 
+									</p>
+								</div>
+
+								<div class="section-block">
+									<div class="callout-block callout-info">
+										<div class="icon-holder">
+											<i class="fa fa-info-circle"></i>
+										</div><!--//icon-holder-->
+										<div class="content">
+											<h4 class="callout-title">Aenean imperdiet</h4>
+											<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium <code>&lt;code&gt;</code> , Nemo enim ipsam voluptatem quia voluptas <a href="#">link example</a> sit aspernatur aut odit aut fugit.</p>
+										</div><!--//content-->
+									</div><!--//callout-block-->
+									
+									<div class="callout-block callout-warning">
+										<div class="icon-holder">
+											<i class="fa fa-bug"></i>
+										</div><!--//icon-holder-->
+										<div class="content">
+											<h4 class="callout-title">Morbi posuere</h4>
+											<p>Nunc hendrerit odio quis dignissim efficitur. Proin ut finibus libero. Morbi posuere fringilla felis eget sagittis. Fusce sem orci, cursus in tortor <a href="#">link example</a> tellus vel diam viverra elementum.</p>
+										</div><!--//content-->
+									</div><!--//callout-block-->
+									
+									<div class="callout-block callout-success">
+										<div class="icon-holder">
+											<i class="fa fa-thumbs-up"></i>
+										</div><!--//icon-holder-->
+										<div class="content">
+											<h4 class="callout-title">Lorem ipsum dolor sit amet</h4>
+											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <a href="#">Link example</a> aenean commodo ligula eget dolor.</p>
+										</div><!--//content-->
+									</div><!--//callout-block-->
+									
+									<div class="callout-block callout-danger">
+										<div class="icon-holder">
+											<i class="fa fa-exclamation-triangle"></i>
+										</div><!--//icon-holder-->
+										<div class="content">
+											<h4 class="callout-title">Interdum et malesuada</h4>
+											<p>Morbi eget interdum sapien. Donec sed turpis sed nulla lacinia accumsan vitae ut tellus. Aenean vestibulum <a href="#">Link example</a> maximus ipsum vel dignissim. Morbi ornare elit sit amet massa feugiat, viverra dictum ipsum pellentesque. </p>
+										</div><!--//content-->
+									</div><!--//callout-block-->
+								</div>
+							</section><!--//doc-section-->
+							<section id="tables-section" class="doc-section">
+								<h2 class="section-title">Tables</h2>
+								<div class="section-block">
+									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis.
+									</p>
+								</div>
+								<div class="section-block">
+									<h6>Basic Table</h6>
+									<div class="table-responsive">
+										<table class="table">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>First Name</th>
+													<th>Last Name</th>
+													<th>Username</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>Mark</td>
+													<td>Otto</td>
+													<td>@mdo</td>
+												</tr>
+												<tr>
+													<th scope="row">2</th>
+													<td>Jacob</td>
+													<td>Thornton</td>
+													<td>@fat</td>
+												</tr>
+												<tr>
+													<th scope="row">3</th>
+													<td>Larry</td>
+													<td>the Bird</td>
+													<td>@twitter</td>
+												</tr>
+											</tbody>
+										</table>
+									</div><!--//table-responsive-->
+									<h6>Bordered Table</h6>
+									<div class="table-responsive">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>First Name</th>
+													<th>Last Name</th>
+													<th>Username</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>Mark</td>
+													<td>Otto</td>
+													<td>@mdo</td>
+												</tr>
+												<tr>
+													<th scope="row">2</th>
+													<td>Jacob</td>
+													<td>Thornton</td>
+													<td>@fat</td>
+												</tr>
+												<tr>
+													<th scope="row">3</th>
+													<td>Larry</td>
+													<td>the Bird</td>
+													<td>@twitter</td>
+												</tr>
+											</tbody>
+										</table>
+									</div><!--//table-responsive-->
+									<h6>Striped Table</h6>
+									<div class="table-responsive">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>First Name</th>
+													<th>Last Name</th>
+													<th>Username</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<th scope="row">1</th>
+													<td>Mark</td>
+													<td>Otto</td>
+													<td>@mdo</td>
+												</tr>
+												<tr>
+													<th scope="row">2</th>
+													<td>Jacob</td>
+													<td>Thornton</td>
+													<td>@fat</td>
+												</tr>
+												<tr>
+													<th scope="row">3</th>
+													<td>Larry</td>
+													<td>the Bird</td>
+													<td>@twitter</td>
+												</tr>
+											</tbody>
+										</table>
+									</div><!--//table-responsive-->
+								</div><!--//section-block-->
+							</section><!--//doc-section-->
+							<section id="buttons-section" class="doc-section">
+								<h2 class="section-title">Buttons</h2>
+								<div class="section-block">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec imperdiet turpis. Curabitur aliquet pulvinar ultrices. Etiam at posuere leo. Proin ultrices ex et dapibus feugiat <a href="#">link example</a> aenean purus leo, faucibus at elit vel, aliquet scelerisque dui. Etiam quis elit euismod, imperdiet augue sit amet, imperdiet odio. Aenean sem erat, hendrerit  eu gravida id, dignissim ut ante. Nam consequat porttitor libero euismod congue. 
+									</p>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<h6>Basic Buttons</h6>
+											<ul class="list list-unstyled">
+												<li><a href="#" class="btn btn-primary">Primary Button</a></li>
+												<li><a href="#" class="btn btn-green">Green Button</a></li>
+												<li><a href="#" class="btn btn-blue">Blue Button</a></li>
+												<li><a href="#" class="btn btn-orange">Orange Button</a></li>
+												<li><a href="#" class="btn btn-red">Red Button</a></li>
+											</ul>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<h6>CTA Buttons</h6>
+											<ul class="list list-unstyled">
+												<li><a href="#" class="btn btn-primary btn-cta"><i class="fa fa-download"></i> Download Now</a></li>
+												<li><a href="#" class="btn btn-green btn-cta"><i class="fa fa-code-fork"></i> Fork Now</a></li>
+												<li><a href="#" class="btn btn-blue btn-cta"><i class="fa fa-play-circle"></i> Find Out Now</a></li>
+												<li><a href="#" class="btn btn-orange btn-cta"><i class="fa fa-bug"></i> Report Bugs</a></li>
+												<li><a href="#" class="btn btn-red btn-cta"><i class="fa fa-exclamation-circle"></i> Submit Issues</a></li>
+											</ul>
+										</div>
+									</div><!--//row-->
+								</div><!--//section-block-->
+							</section><!--//doc-section-->
+							<section id="icons-section" class="doc-section">
+								<h2 class="section-title">Icons</h2>
+								<div class="section-block">
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec imperdiet turpis. Curabitur aliquet pulvinar ultrices. Etiam at posuere leo. Proin ultrices ex et dapibus feugiat <a href="#">link example</a> aenean purus leo, faucibus at elit vel, aliquet scelerisque dui. Etiam quis elit euismod, imperdiet augue sit amet, imperdiet odio. Aenean sem erat, hendrerit  eu gravida id, dignissim ut ante. Nam consequat porttitor libero euismod congue. 
+									</p>
+								</div><!--//section-block-->
+								<div class="section-block">
+									<h6>Elegant Icon Font</h6>
+									<a href="https://www.elegantthemes.com/blog/resources/elegant-icon-font" target="_blank"><img class="img-responsive" src="assets/images/demo/elegant-icon-font.jpg" alt="elegant icons" /></a>
+								</div><!--//section-block-->
+								<div class="section-block">
+									<h6>FontAwesome Icon Font</h6>
+									<a href="https://fortawesome.github.io/Font-Awesome/" target="_blank"><img class="img-responsive" src="assets/images/demo/fontawesome-icons.png" alt="fontawesome" /></a>
+								</div><!--//section-block-->
+															
+							</section><!--//doc-section-->
+						</div><!--//content-inner-->
+					</div><!--//doc-content-->
+					<div class="doc-sidebar hidden-xs">
+						<nav id="doc-nav">
+							<ul id="doc-menu" class="nav doc-menu" style="overflow: hidden;max-height:99vh;">
+                                <li><a class="scrollto" href="#getting-started-section">Getting started</a></li>
+                                <li><a class="scrollto" href="#prependix-section">Prependix</a></li>
+                                <li>
+                                    <a class="scrollto" href="#security-section">Security</a>
+                                    <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#security-permissions">Permissions</a></li>
+                                        <li><a class="scrollto" href="#security-sandboxing">Sandboxing</a></li>
+                                        <li><a class="scrollto" href="#security-builtin-replacement">Builtin-replacement</a></li>
+                                    </ul><!--//nav-->
+                                </li>
+								<li>
+									<a class="scrollto" href="#custom-types">Custom types</a>
+									<ul class="nav doc-sub-menu">
+										<li><a class="scrollto" href="#vec2">vec2</a></li>
+										<li><a class="scrollto" href="#vec3">vec3</a></li>
+										<li><a class="scrollto" href="#vec4">vec4</a></li>
+										<li><a class="scrollto" href="#uirect">UIRect</a></li>
+										<li><a class="scrollto" href="#quad_item">QuadItem</a></li>
+										<li><a class="scrollto" href="#line_item">LineItem</a></li>
+										<li><a class="scrollto" href="#button_container">ButtonContainer</a></li>
+										<li><a class="scrollto" href="#editbox_container">EditboxContainer</a></li>
+										<li><a class="scrollto" href="#teerenderinfo">TeeRenderInfo</a></li>
+									</ul><!--//nav-->
+								</li>
+								<li>
+									<a class="scrollto" href="#real-api">Custom Functions and Data</a>
+									<ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#global-setscripttitle">SetScriptTitle</a></li>
+                                        <li><a class="scrollto" href="#global-setscriptinfo">SetScriptInfo</a></li>
+                                        <li><a class="scrollto" href="#global-checkversion">CheckVersion</a></li>
+                                        <li><a class="scrollto" href="#global-throw">throw</a></li>
+                                        <li><a class="scrollto" href="#global-import">Import</a></li>
+                                        <li><a class="scrollto" href="#global-killscript">KillScript</a></li>
+                                        <li><a class="scrollto" href="#global-listdir">Listdir</a></li>
+                                        <li><a class="scrollto" href="#global-enterfullscreen">EnterFullscreen</a></li>
+                                        <li><a class="scrollto" href="#global-exitfullscreen">ExitFullscreen</a></li>
+                                        <li><a class="scrollto" href="#global-scriptpath">ScriptPath</a></li>
+                                        <li><a class="scrollto" href="#global-strisnetaddr">StrIsNetAddr</a></li>
+
+										<li><a class="scrollto" href="#game-client">Game.Client</a></li>
+										<li><a class="scrollto" href="#game-ui">Game.Ui</a></li>
+										<li><a class="scrollto" href="#game-rendertools">Game.RenderTools</a></li>
+										<li><a class="scrollto" href="#game-chat">Game.Chat</a></li>
+										<li><a class="scrollto" href="#game-console">Game.Console</a></li>
+										<li><a class="scrollto" href="#game-irc">Game.IRC</a></li>
+										<li><a class="scrollto" href="#game-sound">Game.Sound</a></li>
+										<li><a class="scrollto" href="#game-emote">Game.Emote</a></li>
+										<li><a class="scrollto" href="#game-collision">Game.Collision</a></li>
+										<li><a class="scrollto" href="#game-hud">Game.HUD</a></li>
+                                        <li><a class="scrollto" href="#game-menus">Game.Menus</a></li>
+										<li><a class="scrollto" href="#game-voting">Game.Voting</a></li>
+										<li><a class="scrollto" href="#game-charsnap-cur">Game.CharSnap(ID).Cur</a></li>
+										<li><a class="scrollto" href="#game-snap-playinfo">Game.Snap:PlayerInfos(ID)</a></li>
+										<!-- <li><a class="scrollto" href="#game-vclient-input">Game.VClient(i).Input</a></li> -->
+										<li><a class="scrollto" href="#game-players-tee">Game.Players(ID).Tee</a></li>
+										<li><a class="scrollto" href="#game-players-tee">Game.LocalTee</a></li>
+										<li><a class="scrollto" href="#game-tuning">Game.Tuning()</a></li>
+										<li><a class="scrollto" href="#game-input">Game.Input</a></li>
+										<li><a class="scrollto" href="#game-serverinfo">Game.ServerInfo</a></li>
+										<li><a class="scrollto" href="#game-snap">Game.Snap</a></li>
+										<li><a class="scrollto" href="#game-charsnap">Game.CharSnap(ID)</a></li>
+										<li><a class="scrollto" href="#game-specinfo">Game.SpecInfo</a></li>
+										<li><a class="scrollto" href="#game-players">Game.Players(ID)</a></li>
+										
+										<li><a class="scrollto" href="#engine-input">Engine.Input</a></li>
+										<li><a class="scrollto" href="#engine-curl">Engine.Curl</a></li>
+										<li><a class="scrollto" href="#engine-graphics">Engine.Graphics</a></li>
+										<li><a class="scrollto" href="#engine-textrender">Engine.TextRender</a></li>
+										<li><a class="scrollto" href="#engine-storage">Engine.Storage</a></li>
+									</ul><!--//nav-->
+								</li>
+                                <li>
+                                    <a class="scrollto" href="#custom-lua-libs">Custom Lua Libs</a>
+                                    <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#libs-algorithm">algorithm</a></li>
+                                        <li><a class="scrollto" href="#libs-broadcast">broadcast</a></li>
+                                        <li><a class="scrollto" href="#libs-config">config</a></li>
+                                        <li><a class="scrollto" href="#libs-containers">containers</a></li>
+                                        <li><a class="scrollto" href="#libs-debug">debug</a></li>
+                                        <li><a class="scrollto" href="#libs-general">general</a></li>
+                                        <li><a class="scrollto" href="#libs-logger">logger</a></li>
+                                <!--    <li><a class="scrollto" href="#libs-luac">luac</a></li> -->
+                                        <li><a class="scrollto" href="#libs-math">math</a></li>
+                                        <li><a class="scrollto" href="#libs-queue">queue</a></li>
+                                        <li><a class="scrollto" href="#libs-sound">sound</a></li>
+                                        <li><a class="scrollto" href="#libs-sprites">sprites</a></li>
+                                        <li><a class="scrollto" href="#libs-stringutils">stringutils</a></li>
+                                        <li><a class="scrollto" href="#libs-tune">tune</a></li>
+                                        <li><a class="scrollto" href="#libs-twdata">twdata</a></li>
+                                        <li><a class="scrollto" href="#libs-twutils">twutils</a></li>
+                                        <li><a class="scrollto" href="#libs-types">types</a></li>
+                                        <li><a class="scrollto" href="#libs-ui">ui</a></li>
+                                    </ul><!--//nav-->
+                                </li>
+                                <li>
+                                    <a class="scrollto" href="#custom-lua-libs">Events</a>
+                                    <ul class="nav doc-sub-menu">
+                                        <li><a class="scrollto" href="#events-overview">Basics</a></li>
+                                        <li><a class="scrollto" href="#events-registerevent">RegisterEvent</a></li>
+                                        <li><a class="scrollto" href="#events-removeevent">RemoveEvent</a></li>
+                                        <li><a class="scrollto" href="#events-eventlist">EventList</a></li>
+                                        <li><a class="scrollto" href="#events-renderlevels">RenderLevel's</a></li>
+                                        <li><a class="scrollto" href="#events-onscriptinit">OnScriptInit</a></li>
+                                        <li><a class="scrollto" href="#events-onscriptunload">OnScriptUnload</a></li>
+                                        <li><a class="scrollto" href="#events-onchat">OnChat</a></li>
+                                        <li><a class="scrollto" href="#events-onchatsend">OnChatSend</a></li>
+                                        <li><a class="scrollto" href="#events-onconfigopen">OnConfigOpen</a></li>
+                                        <li><a class="scrollto" href="#events-onconfigclose">OnConfigClose</a></li>
+                                        <li><a class="scrollto" href="#events-onconsolecommand">OnConsoleCommand</a></li>
+                                        <li><a class="scrollto" href="#events-onentergame">OnEnterGame</a></li>
+                                        <li><a class="scrollto" href="#events-onflaggrab">onflaggrab</a></li>
+                                        <li><a class="scrollto" href="#events-ongamestart">OnGameStart</a></li>
+                                        <li><a class="scrollto" href="#events-ongameover">OnGameOver</a></li>
+                                        <li><a class="scrollto" href="#events-onkeypress">OnKeyPress</a></li>
+                                        <li><a class="scrollto" href="#events-onkeyrelease">OnKeyRelease</a></li>
+                                        <li><a class="scrollto" href="#events-onkill">OnKill</a></li>
+                                        <li><a class="scrollto" href="#events-onmessageirc">OnMessageIRC</a></li>
+                                        <li><a class="scrollto" href="#events-onrenderbackground">OnRenderBackground</a></li>
+                                        <li><a class="scrollto" href="#events-onrenderlevel">OnRenderLevelXXX</a></li>
+                                        <li><a class="scrollto" href="#events-oninputlevel">OnInputLevel</a></li>
+                                        <li><a class="scrollto" href="#events-onrenderscoreboard">OnRenderScoreboard</a></li>
+                                        <li><a class="scrollto" href="#events-onpredhammerhit">OnPredHammerHit</a></li>
+                                        <li><a class="scrollto" href="#events-prerenderplayer">PreRenderPlayer</a></li>
+                                        <li><a class="scrollto" href="#events-postrenderplayer">PostRenderPlayer</a></li>
+                                        <li><a class="scrollto" href="#events-onsnapinput">OnSnapInput</a></li>
+                                        <li><a class="scrollto" href="#events-onstatechange">OnStateChange</a></li>
+                                        <li><a class="scrollto" href="#events-ontick">OnTick</a></li>
+                                        <li><a class="scrollto" href="#events-onenterfullscreen">OnEnterFullscreen</a></li>
+                                        <li><a class="scrollto" href="#events-onexitfullscreen">OnExitFullscreen</a></li>
+                                    </ul><!--//nav-->
+                                </li>
+
+								<li><a class="scrollto" href="#callouts-section">Callouts</a></li>
+								<li><a class="scrollto" href="#tables-section">Tables</a></li>
+								<li><a class="scrollto" href="#buttons-section">Buttons</a></li>
+								<li><a class="scrollto" href="#video-section">Video</a></li>
+								<li><a class="scrollto" href="#icons-section">Icons</a></li>
+							</ul><!--//doc-menu-->
+						</nav>
+					</div><!--//doc-sidebar-->
+				</div><!--//doc-body-->			  
+			</div><!--//container-->
+		</div><!--//doc-wrapper-->
+		
+		<div id="promo-block" class="promo-block">
+			<div class="container">
+				<div class="promo-block-inner">
+					<h3 class="promo-title text-center"><i class="fa fa-heart"></i> <a href="https://wrapbootstrap.com/theme/appkit-admin-theme-angularjs-WB051SCJ1?ref=3wm" target="_blank">AppKit - Bootstrap Angular Admin Theme for Developers</a></h3>
+					<div class="row">
+						<div class="figure-holder col-md-5 col-sm-6 col-xs-12">
+							<div class="figure-holder-inner">
+								<a href="https://wrapbootstrap.com/theme/appkit-admin-theme-angularjs-WB051SCJ1?ref=3wm" target="_blank"><img class="img-responsive" src="assets/images/demo/appkit-widgets-thumb.jpg" alt="AppKit Theme" /></a>
+								<a class="mask" href="#hook"><i class="icon fa fa-heart pink"></i></a>
+								
+							</div>
+						</div><!--//figure-holder-->
+						<div class="content-holder col-md-7 col-sm-6 col-xs-12">
+							<div class="content-holder-inner">
+								<div class="desc">
+									<h4 class="content-title"><strong>Love this free documentation theme?</strong></h4>
+									<p>Check out AppKit - an Angular admin theme I created with my developer friend <a href="https://twitter.com/tnajdek">Tom Najdek</a> for developers. AppKit uses modern front-end technologies and is packed with useful components and widgets to speed up your app development.</p>
+									<p><strong class="highlight">[Tip for developers]:</strong> If your project is Open Source, you can use this area to promote your other projects or hold third party adverts like Bootstrap and FontAwesome do!</p>
+								</div><!--//desc-->
+						<!--		<div class="author"><a href="http://themes.3rdwavemedia.com">Xiaoying Riley</a></div> -->
+							</div><!--//content-holder-inner-->
+						</div><!--//content-holder-->
+					</div><!--//row-->
+				</div><!--//promo-block-inner-->  
+			</div><!--//container-->
+		</div><!--//promo-block-->
+		
+	</div><!--//page-wrapper-->
+	
+	<footer id="footer" class="footer text-center">
+		<div class="container">
+			<!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+	<!--		<small class="copyright">Designed with <i class="fa fa-heart"></i> by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> for developers</small> -->
+			
+		</div><!--//container-->
+	</footer><!--//footer-->
+	
+
+    <!-- little helper script which is a god damn amazing hack! gotta luv it -->
+    <script>
+        // https://stackoverflow.com/questions/4588759/how-do-you-set-a-javascript-onclick-event-to-a-class-with-css
+        window.onload = function() {
+        var anchors = document.getElementsByTagName('a');
+        for(var i = 0; i < anchors.length; i++) {
+            var anchor = anchors[i];
+            if(anchor.className == "scrollto") {
+                // https://developer.mozilla.org/en-US/docs/Web/API/History_API
+                anchor.setAttribute("onclick", `javascript:(function(){
+                    var stateObj = { foo: "bar" };
+                    history.pushState(stateObj, "", "${anchor.getAttribute("href")}");
+                })()`)
+            }
+        }
+    }
+    </script>
+
+    <script>
+        console.log("Welcome to the console, fellow. You're on for the dark side, hm?")
+    </script>
+	 
+	<!-- Main Javascript -->		  
+	<script type="text/javascript" src="assets/plugins/jquery-1.12.3.min.js"></script>
+	<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/plugins/prism/prism.js"></script>	
+	<script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>																
+	<script type="text/javascript" src="assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+	<script type="text/javascript" src="assets/js/main.js"></script>
+	
+</body>
+</html> 
+

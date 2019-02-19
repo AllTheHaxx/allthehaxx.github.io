@@ -1,0 +1,4 @@
+blue	callout-info		fa-info-circle
+orange	callout-warning		fa-bug
+green	callout-success		fa-thumbs-up
+red		callout-danger		fa-exclamation-triangle
